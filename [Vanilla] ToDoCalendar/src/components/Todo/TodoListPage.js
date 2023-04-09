@@ -16,16 +16,7 @@ export default function TodoListPaeg ({
     })
 
     this.setState = async nextState => {
-        if (this.state.day === nextState.day) {
-            this.state = nextState
-            await fetchTodoList()
-        }
         this.state = nextState
-        this.render()
-
-    }
-
-    const fetchTodoList = async () => {
         const { content } = await request(`/${this.state.day}`)
         todoListView.setState({
             $target: $todoListPage,
@@ -34,10 +25,14 @@ export default function TodoListPaeg ({
                 content: this.state.content
             }
         })
+        this.render()
+
     }
 
     this.render = () => {
         $target.appendChild($todoListPage)
     }
+
+    this.render()
 
 }

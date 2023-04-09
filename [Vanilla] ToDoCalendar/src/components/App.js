@@ -20,7 +20,7 @@ export default function App ({ $target }) {
     const todoListPage = new TodoListPage({ 
         $target: $todoListPage,
         initialState: {
-            day: 1,
+            day: 0,
             content: ``,
             isCompleted: false
         }
