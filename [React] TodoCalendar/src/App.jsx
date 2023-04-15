@@ -1,5 +1,7 @@
 import { useRef, useState } from "react"
 import TodoList from "./Components/Todo/TodoListPage"
+import Calendar from "./Components/Calendar/Calendar"
+// import Time from "./Components/Time"
 
 
 function App() {
@@ -58,14 +60,27 @@ function App() {
     setTodos(
       todos.filter(todo => todo.id !== id)
     )
-    nextId.current--
+
+    if(todos.length === 1) {
+      nextId.current = 0
+    }
+    console.log(todos.filter(todo => todo.id !== id))
+    console.log(nextId.current)
   }
 
   return (
     <div>
-
-        <TodoList todos={ todos } onToggle={onToggle} onDelete={onDelete} />
-
+        {/* <Time /> */}
+        {/* <Calendar todos={ todos }/> */}
+        <TodoList todos={ todos } onToggle={ onToggle } onDelete={ onDelete } onInsert={onInsert} />
+        <button 
+          onClick={() => {
+            console.log(todos)
+            console.log(nextId.current)
+          }}
+        >
+          현재
+        </button>
     </div>
   )
 }
