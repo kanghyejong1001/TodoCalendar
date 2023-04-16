@@ -2,24 +2,24 @@ import styled from "styled-components";
 import TodoListView from "./TodoListView";
 import { useState } from "react";
 
-function TodoList({ todos, onToggle, onDelete, onInsert }) {
+function TodoList({ todos, onToggle, onDelete, setTodos }) {
     const [text, setText] = useState('')
     
     const onChange = (e) => {
         setText(e.target.value)
     }
     
-    const onSubmit = (e) => {
-        onInsert(text)
-        setText('')
-        e.preventDefault()
-    }
+    // const onSubmit = (e) => {
+    //     onInsert(text, setTodos)
+    //     setText('')
+    //     e.preventDefault()
+    // }
     
     return (  
 
         <TodoListDiv>
             <div>
-                <form onSubmit={onSubmit}>
+                {/* <form onSubmit={onSubmit}>
                     <Input 
                         type="text" 
                         placeholder="할 일 입력"
@@ -27,15 +27,15 @@ function TodoList({ todos, onToggle, onDelete, onInsert }) {
                         onChange={onChange}
                     />
                     <Button type="submit">save</Button>
-                </form>
+                </form> */}
             </div>        
             {todos.map((todo, index) => (
                 <TodoListView 
                     key={todo.id}
                     todo={todo}
                     index={index}
-                    onToggle={onToggle}
-                    onDelete={onDelete}
+                    // onToggle={onToggle}
+                    // onDelete={onDelete}
                 />
             ))}
         </TodoListDiv>
