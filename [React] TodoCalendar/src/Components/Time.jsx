@@ -1,34 +1,25 @@
-// import { getTime, getDate } from "../util/current.js";
+// import React, { useState } from 'react'
 
-// export default function Time ({ $target }) {
-//     const $date = document.createElement('h2')
-//     const $time = document.createElement('h3')
+// export default function Time() {
+//     const [timer, setTimer] = useState("00:00:00");
 
-//     $target.appendChild($date)
-//     $target.appendChild($time)
-    
-//     let time = getTime()
-//     let date = getDate()
-    
-//     this.init = () => {
-//         $date.innerHTML = `${date.year}/${date.month}/${date.date}`
-//         $time.innerHTML = `
-//                 ${time.hours < 10 ? "0" + time.hours : time.hours}:
-//                 ${time.minutes < 10 ? "0" + time.minutes : time.minutes}:
-//                 ${time.seconds < 10 ? "0" + time.seconds : time.seconds}`
-//         setInterval(() => {
-//             time = getTime()
-//             $time.innerHTML = `
-//                 ${time.hours < 10 ? "0" + time.hours : time.hours}:
-//                 ${time.minutes < 10 ? "0" + time.minutes : time.minutes}:
-//                 ${time.seconds < 10 ? "0" + time.seconds : time.seconds}`
-            
-//             if (getDate().day !== date.day) {
-//                 date = getDate()
-//                 $date.innerHTML = `${date.year}/${date.month}/${date.date}`
-//             }
-//         }, 1000);
+//         const currentTimer = () => {
+//         const date = new Date();
+//         const hours = String(date.getHours()).padStart(2, "0");
+//         const minutes = String(date.getMinutes()).padStart(2, "0");
+//         const seconds = String(date.getSeconds()).padStart(2, "0");
+//         setTimer(`${hours}:${minutes}:${seconds}`)
 //     }
 
-//     this.init()
+//     const startTimer = () => {
+//         setInterval(currentTimer, 1000)
+//     }
+
+//     startTimer()
+
+//     return (
+//         <>
+//             <h1>{timer}</h1>
+//         </>
+//     )
 // }
