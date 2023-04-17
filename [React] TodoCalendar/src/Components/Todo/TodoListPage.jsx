@@ -1,8 +1,41 @@
 import styled from "styled-components";
 import TodoListView from "./TodoListView";
 import { useState } from "react";
+import { onToggle, onDelete, onInsert } from "../../Util/manageTodo";
 
-function TodoList({ todos, onToggle, onDelete, setTodos }) {
+function TodoList({ day }) {
+    const [todos, setTodos] = useState([
+        {
+            id: 1,
+            text: '숨쉬기',
+            checked: true,
+            day: day
+        },
+        {
+            id: 2,
+            text: '먹기',
+            checked: true,
+            day: day
+        },
+        {
+            id: 3,
+            text: '잠자기',
+            checked: true,
+            day: day
+        },
+        {
+            id: 4,
+            text: '걷기',
+            checked: true,
+            day: day
+        },
+        {
+            id: 5,
+            text: '뛰기',
+            checked: false,
+            day: day
+        },
+    ])
     const [text, setText] = useState('')
     
     const onChange = (e) => {

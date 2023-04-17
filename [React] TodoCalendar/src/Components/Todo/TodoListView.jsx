@@ -9,12 +9,4 @@ function TodoListView({ todo, index, onToggle, onDelete }) {
     )
 }
 
-// import { useState } from "react"
-// import styled from "styled-components"
-
-
-
-// export default TodoInsert
-
-
 export default TodoListView;
