@@ -6,8 +6,8 @@ const useForm = ({ initialValues, onSubmit, validate }) => {
     const [isLoading, setIsLoading] = useState(false)
 
     const handleChange = (e) => {
-        const { name, value } = e.target
-        setValues({ ...value, [name]: value})
+        const { id, value } = e.target
+        setValues({ ...value, [id]: value})
     }
 
     const handleSubmit = async (e) => {
@@ -16,11 +16,10 @@ const useForm = ({ initialValues, onSubmit, validate }) => {
         const newErrors = validate(values)
         if (Object.keys(newErrors).length === 0) {
             await onSubmit()
-        } else {
-            setErrors(newErrors)
         }
-        setIsLoading(false)   
-    }
+        setErrors(newErrors);
+        setIsLoading(false);
+    };
 
     return { values, errors, isLoading, handleChange, handleSubmit }
 }

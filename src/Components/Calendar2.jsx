@@ -42,7 +42,7 @@ function Calendar2() {
   const prevMonth = () => {
     return moment(dateObject).subtract(1, "month");
   };
-
+  
   const nextMonth = () => {
     return moment(dateObject).add(1, "month");
   };
@@ -115,12 +115,16 @@ function Calendar2() {
 
   return (
     <div>
-      <TableHeader colSpan="7">
-        {month()} {year()}
-      </TableHeader>
-      <button onClick={() => setDateObject(prevMonth)}>이전 달</button>
-      <button onClick={() => setDateObject(nextMonth)}>다음 달</button>
-
+      <HeaderContainer>
+        <TableHeader colSpan="7" className="month-header">
+          {dateObject.format("Y년 M월")}
+        </TableHeader>
+        <div className="month-buttons">
+          <button onClick={() => setDateObject(prevMonth())}>이전 달</button>
+          <button onClick={() => setDateObject(nextMonth())}>다음 달</button>
+        </div>
+      </HeaderContainer>
+          
       <table className="calendar">
         <thead>
           <tr>{weekdayHeaders}</tr>
@@ -133,17 +137,21 @@ function Calendar2() {
               </tr>
             )
           })}
-          
         </tbody>
       </table>
     </div>
   );
+  
 }
 
 const TableHeader = styled.th`
-  height: 50px;
+  height: 30px;
   border: black solid 1px;
-
+  text-align: center;
+  
+  &.month-header {
+    color: pink;
+  }
 `;
 
 const Cells = styled.td`
@@ -151,6 +159,8 @@ const Cells = styled.td`
   width: 100px;
   color: black;
   border: black solid 1px;
+  // 각 켈린더의 넘처흘림 방지
+  overflow: hidden;
 `;
 
 const DayTop = styled.div`
@@ -162,5 +172,17 @@ const DayBottom = styled.div`
   height: 70%;
   background-color: blue;
 `;
+
+const HeaderContainer = styled.div`
+  background-color: grey;
+  display: flex;
+  flex-direction: column; 
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 10px;
+`;
+
+
 
 export default Calendar2
