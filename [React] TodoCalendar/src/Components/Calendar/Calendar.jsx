@@ -51,33 +51,52 @@ function Calendar() {
 
     return (
         <div>
-        <div colSpan="7">
-            {month(dateObject)} {year(dateObject)}
-        </div>
-
-        <button onClick={() => setDateObject(prevMonth)}>이전 달</button>
-        <button onClick={() => setDateObject(nextMonth)}>다음 달</button>
-
-        <table className="calendar">
-            <thead>
-            <tr>{weekdayHeaders}</tr>
-            </thead>
-            <tbody>
-            {rows.map((d, i) => {
-                return (
-                <tr key={`row-${i}`}>{d}</tr>
-                )
-            })}
-            
-            </tbody>
-        </table>
+            <table className="calendar">
+                <thead>
+                    <tr>
+                        <TableHeader colSpan="7" className="month-header">
+                            {dateObject.format("Y년 M월")}
+                            <HeaderContainer>
+                                <div className="month-buttons">
+                                    <button onClick={() => setDateObject(prevMonth())}>이전 달</button>
+                                    <button onClick={() => setDateObject(nextMonth())}>다음 달</button>
+                                </div>
+                            </HeaderContainer>
+                        </TableHeader>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr>{weekdayHeaders}</tr>
+                {rows.map((d, i) => {
+                    return (
+                    <tr key={`row-${i}`}>{d}</tr>
+                    )
+                })}
+                
+                </tbody>
+            </table>
         </div>
     );
 }
 
 const TableHeader = styled.th`
-    height: 50px;
+    height: 30px;
     border: black solid 1px;
+    text-align: center;
+
+    &.month-header {
+        color: pink;
+    }
+`;
+
+const HeaderContainer = styled.div`
+    background-color: grey;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 10px;
 `;
 
 const Cells = styled.td`
@@ -85,6 +104,8 @@ const Cells = styled.td`
     width: 100px;
     color: black;
     border: black solid 1px;
+    // 각 켈린더의 넘처흘림 방지
+    overflow: hidden;
 `;
 
 const DayTop = styled.div`
@@ -97,4 +118,46 @@ const DayBottom = styled.div`
     background-color: blue;
 `;
 
+
+
 export default Calendar
+
+
+
+//   return (
+//     <div>
+//       <HeaderContainer>
+//         <TableHeader colSpan="7" className="month-header">
+//           {dateObject.format("Y년 M월")}
+//         </TableHeader>
+//         <div className="month-buttons">
+//           <button onClick={() => setDateObject(prevMonth())}>이전 달</button>
+//           <button onClick={() => setDateObject(nextMonth())}>다음 달</button>
+//         </div>
+//       </HeaderContainer>
+          
+//       <table className="calendar">
+//         <thead>
+//           <tr>{weekdayHeaders}</tr>
+//         </thead>
+//         <tbody>
+//           {rows.map((d, i) => {
+//             return (
+//               <tr key={`row-${i}`}>
+//                 {d}
+//               </tr>
+//             )
+//           })}
+//         </tbody>
+//       </table>
+//     </div>
+//   );
+  
+
+
+
+
+
+
+
+// export default Calendar2
