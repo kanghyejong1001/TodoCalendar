@@ -7,7 +7,7 @@ import { daysInMonth, currentDay, firstDayOfMonth, daysInPrevMonth, year, month,
 
 function Calendar() {
     const [dateObject, setDateObject] = useState(moment());
-    
+    console.log(dateObject)
     const todoList = []
     const nextId = useRef(5)
     

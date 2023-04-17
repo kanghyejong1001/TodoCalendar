@@ -13,7 +13,7 @@ const useForm = ({ initialValues, onSubmit, validate}) => {
     const handleSubmit = async (e) => {
         setIsLoading(true);
         e.preventDefault();
-        const neErrors = validate(values);
+        const newErrors = validate(values);
         if (Object.keys(newErrors).lenght === 0 ) {
             await onSubmit();
         } else {
