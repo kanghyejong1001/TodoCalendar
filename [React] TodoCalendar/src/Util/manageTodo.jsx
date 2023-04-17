@@ -1,4 +1,4 @@
-const onInsert = (text, setTodos) => {
+export const onInsert = (text, setTodos) => {
     setTodos(
         todos.concat([
             {
@@ -8,10 +8,10 @@ const onInsert = (text, setTodos) => {
             }
         ])
     )
-    nextId.current++
+    // nextId.current++
 }
 
-const onToggle = (id, day) => {
+export const onToggle = (id, day) => {
     setTodos(
         todos.map(todo => 
             todo.id === id ? { ...todo, checked: !todo.checked } : todo  
@@ -19,7 +19,7 @@ const onToggle = (id, day) => {
     )
 }
 
-const onDelete = (id) => {
+export const onDelete = (id) => {
     setTodos(
         todos.filter(todo => todo.id !== id)
     )
