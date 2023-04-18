@@ -5,9 +5,9 @@ import TodoList from "../Todo/TodoListPage";
 import { request } from "../../api/api";
 import { daysInMonth, currentDay, firstDayOfMonth, daysInPrevMonth, year, month, prevMonth, nextMonth } from "../../Util/manageCalendar";
 
-function Calendar() {
+function Calendar({setIsLogin}) {
     const [dateObject, setDateObject] = useState(moment());
-    console.log(dateObject)
+
     const todoList = []
     const nextId = useRef(5)
     
@@ -51,17 +51,18 @@ function Calendar() {
 
     return (
         <div>
+            <button onClick={() => setIsLogin(false)}>logout</button>
+            <HeaderContainer>
+                <div className="month-buttons">
+                    <button onClick={() => setDateObject(prevMonth(dateObject))}>이전 달</button>
+                    <button onClick={() => setDateObject(nextMonth(dateObject))}>다음 달</button>
+                </div>
+            </HeaderContainer>
             <table className="calendar">
                 <thead>
                     <tr>
                         <TableHeader colSpan="7" className="month-header">
                             {dateObject.format("Y년 M월")}
-                            <HeaderContainer>
-                                <div className="month-buttons">
-                                    <button onClick={() => setDateObject(prevMonth())}>이전 달</button>
-                                    <button onClick={() => setDateObject(nextMonth())}>다음 달</button>
-                                </div>
-                            </HeaderContainer>
                         </TableHeader>
                     </tr>
                 </thead>
