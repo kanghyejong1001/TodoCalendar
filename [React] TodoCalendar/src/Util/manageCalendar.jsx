@@ -22,7 +22,7 @@ export const year = (dateObject) => {
 };
 
 export const month = (dateObject) => {
-  return dateObject.format("MMMM");
+  return dateObject.format("M");
 };
 
 export const prevMonth = (dateObject) => {

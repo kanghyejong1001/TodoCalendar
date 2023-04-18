@@ -1,15 +1,13 @@
 import React, { useState, useRef, useMemo } from "react";
-import moment from "moment";
-import styled from "styled-components";
-import TodoList from "../Todo/TodoListPage";
-import { request } from "../../api/api";
+import { TableHeader, HeaderContainer, Cells, DayTop, DayBottom } from "./CalendarStyle";
 import { daysInMonth, currentDay, firstDayOfMonth, daysInPrevMonth, year, month, prevMonth, nextMonth } from "../../Util/manageCalendar";
+import { request } from "../../api/api";
+import moment from "moment";
+import TodoList from "../Todo/TodoListPage";
 
 function Calendar({setIsLogin}) {
     const [dateObject, setDateObject] = useState(moment());
-
     const todoList = []
-    const nextId = useRef(5)
     
     // 달력에 빈칸 부분
     const blanks = Array.from({ length: firstDayOfMonth(dateObject) }, (_, i) => (
@@ -28,7 +26,10 @@ function Calendar({setIsLogin}) {
             <Cells key={`day-${d}`} className={`calendar-day ${currentDay(dateObject) === d ? "current-day" : ""}`}>
                 <DayTop>{d}</DayTop>
                 <DayBottom>
-                    <TodoList day={ d }/>
+                    <TodoList moment={ {
+                        year: year(dateObject), 
+                        month: month(dateObject), 
+                        day: d} }/>
                 </DayBottom>
             </Cells>
         );
@@ -80,85 +81,4 @@ function Calendar({setIsLogin}) {
     );
 }
 
-const TableHeader = styled.th`
-    height: 30px;
-    border: black solid 1px;
-    text-align: center;
-
-    &.month-header {
-        color: pink;
-    }
-`;
-
-const HeaderContainer = styled.div`
-    background-color: grey;
-    display: flex;
-    flex-direction: column; 
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    margin: 10px;
-`;
-
-const Cells = styled.td`
-    height: 100px;
-    width: 100px;
-    color: black;
-    border: black solid 1px;
-    // 각 켈린더의 넘처흘림 방지
-    overflow: hidden;
-`;
-
-const DayTop = styled.div`
-    height: 30%;
-    background-color: green;
-`;
-
-const DayBottom = styled.div`
-    height: 70%;
-    background-color: blue;
-`;
-
-
-
 export default Calendar
-
-
-
-//   return (
-//     <div>
-//       <HeaderContainer>
-//         <TableHeader colSpan="7" className="month-header">
-//           {dateObject.format("Y년 M월")}
-//         </TableHeader>
-//         <div className="month-buttons">
-//           <button onClick={() => setDateObject(prevMonth())}>이전 달</button>
-//           <button onClick={() => setDateObject(nextMonth())}>다음 달</button>
-//         </div>
-//       </HeaderContainer>
-          
-//       <table className="calendar">
-//         <thead>
-//           <tr>{weekdayHeaders}</tr>
-//         </thead>
-//         <tbody>
-//           {rows.map((d, i) => {
-//             return (
-//               <tr key={`row-${i}`}>
-//                 {d}
-//               </tr>
-//             )
-//           })}
-//         </tbody>
-//       </table>
-//     </div>
-//   );
-  
-
-
-
-
-
-
-
-// export default Calendar2
