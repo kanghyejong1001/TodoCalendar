@@ -1,25 +1,30 @@
-// import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { TimeDiv } from "./TimeStyle.jsx";
 
-// export default function Time() {
-//     const [timer, setTimer] = useState("00:00:00");
 
-//         const currentTimer = () => {
-//         const date = new Date();
-//         const hours = String(date.getHours()).padStart(2, "0");
-//         const minutes = String(date.getMinutes()).padStart(2, "0");
-//         const seconds = String(date.getSeconds()).padStart(2, "0");
-//         setTimer(`${hours}:${minutes}:${seconds}`)
-//     }
+export default function Time() {
+    const [timer, setTimer] = useState("00:00:00");
 
-//     const startTimer = () => {
-//         setInterval(currentTimer, 1000)
-//     }
+        const currentTimer = () => {
+        const date = new Date();
+        const hours = String(date.getHours()).padStart(2, "0");
+        const minutes = String(date.getMinutes()).padStart(2, "0");
+        const seconds = String(date.getSeconds()).padStart(2, "0");
+        setTimer(`${hours}:${minutes}:${seconds}`)
+    }
 
-//     startTimer()
+    const startTimer = () => {
+        setInterval(currentTimer, 1000)
+    }
 
-//     return (
-//         <>
-//             <h1>{timer}</h1>
-//         </>
-//     )
-// }
+    startTimer()
+
+    return (
+        <>
+        <TimeDiv>
+            <div>현재 시간은 : </div>
+            <div>{timer}</div>
+        </TimeDiv>
+        </>
+    )
+}
