@@ -1,27 +1,39 @@
 import styled from "styled-components";
 
 export const Input = styled.input`
-    padding: 12px;
     border-radius: 4px;
     border: 1px solid $dee2e6;
-    width: 80%;
     outline: none;
     font-size: 18px;
+    display: block;
+    padding: 0px 30px;
+    border-radius: 20px;
     box-sizing: border-box;
-    display: inline-block;
 `
 
 export const Button = styled.button`
     width: 20%;
-    height: 50px;
-    background:#63e6be;
-    display: inline-block;
+
+`
+export const XButton = styled.button`
+    background: none;
+    &:hover {
+        background: none;
+        color: lightgray;
+        cursor: pointer;
+    }
 `
 
 export const TodoListDiv = styled.div`
-    flex: 1;
-    padding: 20px, 32px;
-    padding-bottom: 48px;
-    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
     background: gray;
+    margin-bottom: 1.2em;
+`
+
+export const Form = styled.form`
+    display: flex;
+    justify-content: space-between;
+    background-color: blue;
+    padding: 0 10px;
 `

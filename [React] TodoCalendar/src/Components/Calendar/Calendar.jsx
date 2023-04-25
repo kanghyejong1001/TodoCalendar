@@ -1,5 +1,5 @@
 import React, { useState, useRef, useMemo } from "react";
-import { TableHeader, HeaderContainer, Cells, DayTop, DayBottom, OuterBox, Row, Button, MonthNavigator, CurrentDate, ButtonsDiv } from "./CalendarStyle";
+import { TableHeader, HeaderContainer, DayTop, DayBottom, DayWrapper, OuterBox, Row, Button, MonthNavigator, CurrentDate, ButtonsDiv, OneDay } from "./CalendarStyle";
 import { daysInMonth, currentDay, firstDayOfMonth, daysInPrevMonth, year, month, prevMonth, nextMonth } from "../../Util/manageCalendar";
 import moment from "moment";
 import TodoList from "../Todo/TodoListPage";
@@ -17,10 +17,8 @@ function Calendar({ setIsLogin }) {
 
     // 달력에 빈칸 부분
     const blanks = Array.from({ length: firstDayOfMonth(dateObject) }, (_, i) => (
-        <Cells key={`empty-${i}`} className="calendar-day empty">
-            <DayTop></DayTop>
-            <DayBottom></DayBottom>
-        </Cells>
+        <DayWrapper key={`empty-${i}`} className="calendar-day empty">
+        </DayWrapper>
     ));
 
     // // 달력에 날짜가 있는 부분
@@ -28,16 +26,18 @@ function Calendar({ setIsLogin }) {
     // // useMemo(() => setTodoList([]), [dateObject])
     for (let d = 1; d <= daysInMonth(dateObject); d++) {
         daysInMonthArr.push(
-            <Cells key={`day-${d}`} className={`calendar-day ${currentDay(dateObject) === d ? "current-day" : ""}`}>
-                <DayTop>{d}</DayTop>
-                <DayBottom>
-                    <TodoList moment={{
-                        year: year(dateObject),
-                        month: month(dateObject),
-                        day: d
-                    }} />
-                </DayBottom>
-            </Cells>
+            <DayWrapper key={`day-${d}`} className={`calendar-day ${currentDay(dateObject) === d ? "current-day" : ""}`}>
+                <OneDay>
+                    <DayTop>{d}</DayTop>
+                    <DayBottom>
+                        <TodoList moment={{
+                            year: year(dateObject),
+                            month: month(dateObject),
+                            day: d
+                        }} />
+                    </DayBottom>
+                </OneDay>
+            </DayWrapper>
         );
     }
 
@@ -54,6 +54,7 @@ function Calendar({ setIsLogin }) {
         <OuterBox>
 
             <HeaderContainer>
+            <CurrentDate>{dateObject.format("Y년 M월")}</CurrentDate>
                 <ButtonsDiv>
                     <Button onClick={() => setIsLogin(false)}>logout</Button>
                     <MonthNavigator>
@@ -67,19 +68,18 @@ function Calendar({ setIsLogin }) {
                         </Button>
                     </MonthNavigator>
                 </ButtonsDiv>
-                <CurrentDate>{dateObject.format("Y년 M월")}</CurrentDate>
+                
             </HeaderContainer>
 
             <table className="calendar">
                 <thead>
-
                     <Row>{weekdayHeaders}</Row>
                 </thead>
 
                 <tbody>
                     {rows.map((d, i) => {
                         return (
-                            <tr key={`row-${i}`}>{d}</tr>
+                            <tr key={`row-${i}`} className="dayNumber">{d}</tr>
                         )
                     })}
                 </tbody>
