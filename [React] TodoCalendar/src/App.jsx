@@ -3,7 +3,7 @@ import LoginForm from "./Components/Login/LoginForm";
 import SignUpForm from "./Components/Login/SignUpForm";
 import Calendar from "./Components/Calendar/CalendarEdit";
 import { Root } from "./AppStyle.jsx";
-import Time from "./Components/Time";
+import Time from "./Components/Time/Time";
 
 
 function App() {
