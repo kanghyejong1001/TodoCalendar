@@ -5,7 +5,7 @@ import { request } from "../../api/api";
 import { currentDay, year, month } from "../../Util/manageCalendar";
 
 
-function TodoList({ moment, dateObject }) {
+function TodoList({ moment, dateObject, dragIndex, dragTodo, dragId, dragMoment, dragDelete }) {
     const [todos, setTodos] = useState([
         {
             id: 1,
@@ -68,7 +68,6 @@ function TodoList({ moment, dateObject }) {
         setTodos(
             todos.filter(todo => todo.id !== id)
         )
-        console.log(id)
         if(todos.length === 1) {
             nextId.current = 0
         }
@@ -140,24 +139,90 @@ function TodoList({ moment, dateObject }) {
         // })
     }
 
-    const dragIndex = useRef();
-    const dragTodo = useRef();
+    const onDrag = (e, index) => {
+        dragIndex.current = index
+        const id = todos[index].id
+        const text = todos[index].text
+        const checked = todos[index].checked
+        const moment = todos[index].moment
+        const day = moment.day
+        dragTodo.current = {
+            id: id, 
+            text: text,
+            checked: checked,
+            moment: moment
+        }
+        dragId.current = id
+        nextId.current = nextId.current === 1 ? 0 : nextId.current
+        dragMoment.current = day
+        
 
-    // const onDrag = (e, index) => {
-    //     dragIndex.current = index;
-    //     dragTodo.current = todos[index];
-    // };
-
-    // const onDrop = (e, index) => {
-    //     const newTodos = [...todos];
-    //     newTodos.splice(dragIndex.current, 1);
-    //     newTodos.splice(index, 0, dragTodo.current);
-    //     setTodos(newTodos);
-    // };
+        dragDelete.current = {
+            'todoList': [...todos], 
+            'setTodoList': setTodos
+        }
+        // console.log('index', dragIndex.current)
+        // console.log('todo', dragTodo.current)
+        // console.log('id', dragId.current)
+        // console.log('moment', dragMoment.current)
+        // console.log('delete', dragDelete.current)
+        console.log('-------------------------------')
+    };
+    
+    const onDrop = (e, index) => {
+        const id = parseInt(e.target.closest('div').id)
+        console.log(dragDelete.current.todoList)
+        if(dragMoment.current === id) {
+            console.log("if")
+            const newTodos = [...todos]
+            console.log(dragTodo.current)
+            dragTodo.current.id = ++nextId.current
+            newTodos.splice(dragIndex.current, 1)
+            newTodos.splice(index, 0, dragTodo.current)
+            setTodos(newTodos)
+        } else{
+            console.log("else")
+            console.log(id)
+            const newTodos = [...todos]
+            
+            // const tempId = dragTodo.current.id
+            const tempText = dragTodo.current.text
+            const tempChecked = dragTodo.current.checked
+            const tempMoment = dragTodo.current.moment
+            const newTodo = {
+                id: ++nextId.current,
+                text: tempText,
+                checked: tempChecked,
+                moment: {
+                    year: tempMoment.year,
+                    month: tempMoment.month,
+                    day: id
+                }
+            }
+            // dragTodo.current.moment.day = id
+            // dragTodo.current.id = ++nextId.current
+            newTodos.splice(index, 0, newTodo)
+            console.log(dragDelete.current)
+            setTodos(newTodos)
+            dragDelete.current.setTodoList(
+                dragDelete.current.todoList.filter(todo => {
+                    return todo.id !== dragId.current
+                })
+            )
+        }
+        console.log('-------------------------------')
+        // if (e.target.closest('div').id === 'div') {
+        //     console.log('div')
+        //     setTodos([dragTodo.current])
+        // }
+    };
     
     return (  
         
-        <TodoListDiv onDrop={onDrop}>
+        <TodoListDiv 
+            id='div'
+            draggable
+        >
             <div>
                 <form onSubmit={onSubmit}>
                     <Input 
@@ -174,11 +239,11 @@ function TodoList({ moment, dateObject }) {
                 <TodoListView 
                     key={todo.id}
                     todo={todo}
-                    index={index}
                     onToggle={onToggle}
                     onDelete={onDelete}
                     onChange={onChange}
-                    // onDrag={onDrag}
+                    onDrag={(e) => onDrag(e, index)}
+                    onDrop={(e) => onDrop(e, index)}
                 />
             ))}
             <Button onClick={() => {console.log(todos)}}></Button>

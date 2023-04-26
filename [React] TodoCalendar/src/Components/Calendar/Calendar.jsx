@@ -23,6 +23,12 @@ function Calendar({setIsLogin}) {
         </Cells>
     ));
 
+    const dragIndex = useRef()
+    const dragTodo = useRef()
+    const dragId = useRef()
+    const dragMoment = useRef()
+    const dragDelete = useRef()
+
     // // 달력에 날짜가 있는 부분
     let daysInMonthArr = [];
     // // useMemo(() => setTodoList([]), [dateObject])
@@ -36,6 +42,11 @@ function Calendar({setIsLogin}) {
                         month: month(dateObject), 
                         day: d} }
                         dateObject={dateObject}
+                        dragIndex={dragIndex}
+                        dragTodo={dragTodo}
+                        dragId={dragId}
+                        dragMoment={dragMoment}
+                        dragDelete={dragDelete}
                     />
                 </DayBottom>
             </Cells>
