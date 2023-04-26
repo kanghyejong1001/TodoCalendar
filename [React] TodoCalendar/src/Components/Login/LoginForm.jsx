@@ -1,5 +1,10 @@
 import { useForm } from "react-hook-form";
-import { Title, Input, Button, ErrorText, CardForm} from "./LoginStyle";
+import { Title, ErrorText, CardForm, ButtonContainer, Input } from "./LoginStyle";
+
+
+
+
+
 
 const LoginForm = ({ onSubmit, setIsLogin, setCheckId }) => {
     const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm();
@@ -10,28 +15,33 @@ const LoginForm = ({ onSubmit, setIsLogin, setCheckId }) => {
             console.log(data)
             setIsLogin(true)
         })}>
-            <Title>Login</Title>
+            <Title>로그인</Title>
             <Input 
                 type="text" 
                 name="id" 
-                placeholder="ID" 
+                placeholder="아이디" 
                 {...register("id", { required: "ID를 입력하세요" })}
+                autoComplete="off"
             />
             {errors.id && <ErrorText>{errors.id.message}</ErrorText>}
             <Input 
                 type="password" 
                 name="password" 
-                placeholder="Password" 
+                placeholder="비밀번호" 
                 {...register("password", { required: "비밀번호를 입력하세요" })}
                 style={{ marginTop: 8 }}
+                autoComplete="off"
             />
             {errors.password && <ErrorText>{errors.password.message}</ErrorText>}
-            <Button type="submit" disabled={isSubmitting} style={{ marginTop: 16 }}>
-                Login
-            </Button>
-            <Button type="button" onClick={() => setCheckId(false)} disabled={isSubmitting} style={{ marginTop: 16 }}>
-                Create Account
-            </Button>
+            <ButtonContainer>
+            <button type="submit" disabled={isSubmitting} style={{ marginTop: 16 }}>
+                로그인
+            </button>
+            <button className="bottomButton" type="button" onClick={() => setCheckId(false)} disabled={isSubmitting} style={{ marginTop: 16 }}>
+                회원 가입
+            </button>
+            </ButtonContainer>
+            
         </CardForm>
     );
 };

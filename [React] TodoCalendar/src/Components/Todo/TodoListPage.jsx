@@ -1,6 +1,6 @@
 import TodoListView from "./TodoListView";
 import { useState, useRef, useEffect } from "react";
-import { Input, Button, TodoListDiv } from "./TodoListStyle";
+import { Input, Button, TodoListDiv, Form } from "./TodoListStyle";
 import { request } from "../../api/api";
 
 function TodoList({ moment }) {
@@ -36,7 +36,7 @@ function TodoList({ moment }) {
             moment: moment
         },
     ])
-    
+
     // useEffect(() => {
     //     setTodos()
     // }, [todos])
@@ -46,7 +46,7 @@ function TodoList({ moment }) {
     const [text, setText] = useState('')
 
     const [delay, setDelay] = useState(false)
-    
+
     const onInsert = (text) => {
         setTodos(
             todos.concat([
@@ -60,21 +60,21 @@ function TodoList({ moment }) {
         )
         nextId.current++
     }
-    
+
     const onToggle = (id) => {
         setTodos(
-            todos.map(todo => 
-                todo.id === id ? { ...todo, checked: !todo.checked } : todo  
+            todos.map(todo =>
+                todo.id === id ? { ...todo, checked: !todo.checked } : todo
             )
         )
     }
-    
+
     const onDelete = (id) => {
         setTodos(
             todos.filter(todo => todo.id !== id)
         )
         console.log(id)
-        if(todos.length === 1) {
+        if (todos.length === 1) {
             nextId.current = 0
         }
     }
@@ -85,23 +85,22 @@ function TodoList({ moment }) {
         }, 2000)
         return () => clearTimeout(temp)
     }, [delay])
-    
+
     const onDelayChange = (e) => {
-        if(!delay) {
+        if (!delay) {
             console.log(delay)
             setDelay(true)
             onChange(e)
             console.log(delay)
         }
-    } 
-    
+    }
+
     const onChange = (e) => {
         console.log(todos)
         parseInt(e.target.id)
-        ? onUpdate(e.target.id, e.target.value)
-        : setText(e.target.value)
+            ? onUpdate(e.target.id, e.target.value)
+            : setText(e.target.value)
         console.log(todos)
-        
     }
 
     const onUpdate = async (id, text) => {
@@ -115,30 +114,29 @@ function TodoList({ moment }) {
         )
     }
 
-    
+
     const onSubmit = (e) => {
         onInsert(text)
         setText('')
         e.preventDefault()
     }
-    
-    return (  
+
+    return (
 
         <TodoListDiv>
-            <div>
-                <form onSubmit={onSubmit}>
-                    <Input 
-                        id="0"
-                        type="text" 
-                        placeholder="할 일 입력"
-                        value={text}
-                        onChange={onChange}
-                    />
-                    <Button type="submit">save</Button>
-                </form>
-            </div>        
+            <Form onSubmit={onSubmit}>
+                <Input
+                    id="0"
+                    type="text"
+                    placeholder="할 일"
+                    value={text}
+                    onChange={onChange}
+                    
+                />
+                <Button type="submit">저장</Button>
+            </Form>
             {todos.map((todo, index) => (
-                <TodoListView 
+                <TodoListView
                     key={todo.id}
                     todo={todo}
                     index={index}
@@ -147,7 +145,7 @@ function TodoList({ moment }) {
                     onChange={onDelayChange}
                 />
             ))}
-            <Button onClick={() => {console.log(todos)}}></Button>
+            <Button onClick={() => { console.log(todos) }}></Button>
         </TodoListDiv>
     );
 }
