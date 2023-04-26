@@ -1,0 +1,47 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  background-color: rgba(255, 255, 255, 0.87);
+  /*#242424;*/ 
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+
+body { 
+  min-height: 100vh;
+  color: black;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+}
+
+
+
+button {
+  background-color: #E2EAFF;
+  color: black;
+  border-radius: 30px;
+  border: transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  color: #fff;
+  background-color: #82A4FF;
+}
+
+button:active {
+  background-color: grey;
+}
+
