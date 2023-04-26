@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function TodoListView({ todo, index, onToggle, onDelete, onChange }) {
+function TodoListView({ todo, index, onToggle, onDelete, onChange, onDrag }) {
     const { id, text, checked, moment } = todo
     
     return (  
@@ -9,7 +9,8 @@ function TodoListView({ todo, index, onToggle, onDelete, onChange }) {
             <span>
                 {/* {index + 1}. {text + '/' + moment.month} */}
                 <input id={id} type="text" defaultValue={text} onChange={onChange} />
-                <button style={{width: "5px", height: "30px" }} onClick={() => onDelete(id)}>x</button>
+                <button onClick={() => onDelete(id)}>x</button>
+                <button onClick={() => console.log('drag')}>::</button>
             </span>
         </div>
     )

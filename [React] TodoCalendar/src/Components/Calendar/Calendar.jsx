@@ -34,13 +34,13 @@ function Calendar({setIsLogin}) {
                     <TodoList moment={ {
                         year: year(dateObject), 
                         month: month(dateObject), 
-                        day: d} }/>
+                        day: d} }
+                        dateObject={dateObject}
+                    />
                 </DayBottom>
             </Cells>
         );
     }
-    
-    
     
     // rows에 앞에서 만든 빈칸들을 7개씩 잘라서 저장
     const rows = [];
