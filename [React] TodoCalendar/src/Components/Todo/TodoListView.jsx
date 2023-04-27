@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { XButton } from "./TodoListStyle"
 
 function TodoListView({ todo, onToggle, onDelete, onChange, onDrag, onDrop }) {
     const { id, text, checked, moment } = todo
@@ -17,6 +18,7 @@ function TodoListView({ todo, onToggle, onDelete, onChange, onDrag, onDrop }) {
                 {/* {index + 1}. {text + '/' + moment.month} */}
                 <textarea id={id} type="text" defaultValue={text} onChange={onChange} />
                 <button onClick={() => onDelete(id)}>x</button>
+
             </span>
         </div>
     )

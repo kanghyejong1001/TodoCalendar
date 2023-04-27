@@ -2,9 +2,9 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { useRef, useState } from "react"
 import LoginForm from "./Components/Login/LoginForm";
 import SignUpForm from "./Components/Login/SignUpForm";
-import Calendar from "./Components/Calendar/Calendar"
-import TodoList from "./Components/Todo/TodoListPage"
-// import Time from "./Components/Time"
+import Calendar from "./Components/Calendar/CalendarEdit";
+import { Root } from "./AppStyle.jsx";
+import Time from "./Components/Time/Time";
 
 
 function App() {
@@ -39,8 +39,6 @@ function App() {
   // }
 
   return (
-    <div>
-
         { isLogin 
           ? <Calendar setIsLogin={setIsLogin}/> 
           : ( checkId 
@@ -68,7 +66,6 @@ function App() {
           </Routes>
         </BrowserRouter> */}
     </div>
-    
   )
 }
 

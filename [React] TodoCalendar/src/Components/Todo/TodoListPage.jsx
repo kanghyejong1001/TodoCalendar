@@ -1,6 +1,6 @@
 import TodoListView from "./TodoListView";
 import { useState, useRef, useEffect } from "react";
-import { Input, Button, TodoListDiv } from "./TodoListStyle";
+import { Input, Button, TodoListDiv, Form } from "./TodoListStyle";
 import { request } from "../../api/api";
 import { currentDay, year, month } from "../../Util/manageCalendar";
 
@@ -47,12 +47,12 @@ function TodoList({ moment, dateObject, dragIndex, dragTodo, dragId, dragMoment,
 
     const [text, setText] = useState('')
 
-    // const [delay, setDelay] = useState(false)
-    
+    const [delay, setDelay] = useState(false)
+
     const onToggle = (id) => {
         setTodos(
-            todos.map(todo => 
-                todo.id === id ? { ...todo, checked: !todo.checked } : todo  
+            todos.map(todo =>
+                todo.id === id ? { ...todo, checked: !todo.checked } : todo
             )
         )
         // async () => await request(`/todos/${year(moment)}${month(moment)}${currentDay(moment)}`, 
@@ -63,12 +63,12 @@ function TodoList({ moment, dateObject, dragIndex, dragTodo, dragId, dragMoment,
         //     }
         // })
     }
-    
+
     const onDelete = (id) => {
         setTodos(
             todos.filter(todo => todo.id !== id)
         )
-        if(todos.length === 1) {
+        if (todos.length === 1) {
             nextId.current = 0
         }
         // async () => await request(`/todos/${year(moment)}${month(moment)}${currentDay(moment)}`, { method: 'DELETE' })
@@ -204,8 +204,9 @@ function TodoList({ moment, dateObject, dragIndex, dragTodo, dragId, dragMoment,
                     <Button type="submit">save</Button>
                 </form>
             </div>        
+
             {todos.map((todo, index) => (
-                <TodoListView 
+                <TodoListView
                     key={todo.id}
                     todo={todo}
                     onToggle={onToggle}
@@ -215,7 +216,7 @@ function TodoList({ moment, dateObject, dragIndex, dragTodo, dragId, dragMoment,
                     onDrop={(e) => onDrop(e, index)}
                 />
             ))}
-            <Button onClick={() => {console.log(todos)}}></Button>
+            <Button onClick={() => { console.log(todos) }}></Button>
         </TodoListDiv>
     );
 }
