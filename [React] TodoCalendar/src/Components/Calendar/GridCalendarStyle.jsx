@@ -7,6 +7,12 @@ export const boxStyles = `
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 `;
 
+const WholeCalendar = styled.div`
+display: flex;
+flex-direction: column;
+background: blue;
+`;
+
 const HeaderContainer = styled.div`
 display: flex;
 flex-direction: column;
@@ -18,7 +24,6 @@ ${boxStyles};
 `;
 
 const Button = styled.button`
-width: 150px;
 font-size: 1.0em;
 margin: 0 10px;
 `;
@@ -43,8 +48,6 @@ const CalendarWrapper = styled.div`
 display: grid;
 grid-template-columns: repeat(7, 1fr);
 grid-template-rows: 50px repeat(6, 1fr);
-width: 100%;
-${boxStyles};
 `;
 
 const WeekdayWrapper = styled.div`
@@ -53,11 +56,15 @@ justify-content: center;
 align-items: center;
 font-size: 2.0em;
 font-weight: bold;
+padding: 10px;
+margin: 0px 10px;
 ${boxStyles};
 `;
 
 
 const DayWrapper = styled.div`
+  margin: 10px;
+  padding: 10px;
   ${boxStyles};
   
 `;
@@ -65,14 +72,14 @@ const DayWrapper = styled.div`
 const TopDiv = styled.div`
 font-size: 2.0em;
 font-weight: bold;
-padding 10px;
-background: red;
+padding 10px 20px;
 `;
 
 const BottomDiv = styled.div`
 `;
 
 export { 
+    WholeCalendar, 
     HeaderContainer, 
     Button, 
     MonthNavigator, 

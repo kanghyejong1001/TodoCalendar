@@ -17,7 +17,9 @@ import {
     WeekdayWrapper, 
     DayWrapper, 
     TopDiv, 
-    BottomDiv } from "./CalendarEditStyle";
+    BottomDiv,
+    WholeCalendar
+    } from "./CalendarTwoStyle";
 
 function Calendar({ setIsLogin }) {
     const [dateObject, setDateObject] = useState(moment());
@@ -53,7 +55,7 @@ function Calendar({ setIsLogin }) {
     };
 
     return (
-        <>
+        <WholeCalendar>
             <HeaderContainer>
                 <CurrentDate>{dateObject.format("Y년 M월")}</CurrentDate>
                 <ButtonsDiv>
@@ -76,7 +78,7 @@ function Calendar({ setIsLogin }) {
                 ))}
                 {daysInMonthArr()}
             </CalendarWrapper>
-        </>
+        </WholeCalendar>
     );
 }
 

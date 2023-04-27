@@ -3,8 +3,8 @@
   line-height: 1.5;
   font-weight: 400;
 
-  background-color: rgba(255, 255, 255, 0.87);
-  /*#242424;*/ 
+
+  /*#242424;*/
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -12,18 +12,27 @@
   -webkit-text-size-adjust: 100%;
 }
 
-
-body { 
-  min-height: 100vh;
-  color: black;
+* {
   margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: white;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+html {
+  height: 100%;
+}
 
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;  
+  min-height: 100%;
+  font-weight: bold;
+  color: black;
+  background-color: white;
+  overflow-x: hidden;
+  font-size: 20px;
+}
 
 button {
   background-color: #E2EAFF;
@@ -32,8 +41,8 @@ button {
   border: transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
-  font-weight: bold;
   cursor: pointer;
+  font-weight: bold;
 }
 
 button:hover {
@@ -44,4 +53,3 @@ button:hover {
 button:active {
   background-color: grey;
 }
-

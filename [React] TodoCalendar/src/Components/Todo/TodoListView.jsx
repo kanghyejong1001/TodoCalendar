@@ -1,18 +1,18 @@
 import { useState } from "react";
-import { XButton } from "./TodoListStyle"
+import { TextBox, CheckBox, XButton, TodoRow, TodoList } from "./TodoListStyle"
 
 function TodoListView({ todo, index, onToggle, onDelete, onChange }) {
     const { id, text, checked, moment } = todo
-    
-    return (  
-        <div style={{ textDecoration: checked ? 'line-through' : 'none' }}>
-            <input  type="checkbox"  onChange={() => onToggle(id)} checked={checked} />
-            <span>
+
+    return (
+        <TodoList style={{ textDecoration: checked ? 'line-through' : 'none' }}>
+            <TodoRow>
+                <label><CheckBox type="checkbox" onChange={() => onToggle(id)} checked={checked} /></label>
                 {/* {index + 1}. {text + '/' + moment.month} */}
-                <input id={id} type="text" defaultValue={text} onChange={onChange} />
-                <XButton onClick={() => onDelete(id)}>x</XButton>
-            </span>
-        </div>
+                <TextBox id={id} type="text" defaultValue={text} onChange={onChange} />
+                <XButton onClick={() => onDelete(id)}>X</XButton>
+            </TodoRow>
+        </TodoList>
     )
 }
 
