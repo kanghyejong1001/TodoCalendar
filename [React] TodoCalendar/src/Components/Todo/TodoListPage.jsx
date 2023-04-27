@@ -145,7 +145,7 @@ function TodoList({ moment }) {
                     onChange={onDelayChange}
                 />
             ))}
-            <Button onClick={() => { console.log(todos) }}>출력</Button>
+            <Button className="LogButton" onClick={() => { console.log(todos) }}>출력</Button>
         </TodoListDiv>
     );
 }

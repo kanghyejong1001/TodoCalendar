@@ -14,29 +14,38 @@ export const Input = styled.input`
 `
 
 export const Button = styled.button`
+    
     display: inline-block;
     font-weight: bold;
+    &:.LogButton {
+        position: relative;
+        off-left: 50%;
+        
+    }
 
 `
 export const XButton = styled.button`
-    background: none;
+    background: white;
+    color: white;
     font-weight: bold;
+    padding: 2px;
     &:hover {
         background: none;
-        color: lightgray;
+        color: black;
         cursor: pointer;
     }
 `
 
 export const TextBox = styled.input`
-    width: 65%;
-    padding: em;
-    margin: 0 0.2em;
+    text-align: center;
+    padding: 0.1em;
     font-size: 1.2em;
     font-weight: bold;
+    border: transparent;
+    box-sizing: border-box;
 `
 export const TodoRow = styled.div`
-    display: block;
+    display: flex;
     padding-left: 0.2em;
     
 `
@@ -57,7 +66,6 @@ export const TodoList = styled.div`
 
 
 export const TodoListDiv = styled.div`
-    flex-direction: column;
     margin-bottom: 1em;
 `
 
