@@ -131,6 +131,7 @@ function TodoList({ moment }) {
                     placeholder="할 일"
                     value={text}
                     onChange={onChange}
+                    autoComplete="off"
                     
                 />
                 <Button type="submit">저장</Button>
@@ -145,7 +146,7 @@ function TodoList({ moment }) {
                     onChange={onDelayChange}
                 />
             ))}
-            <Button className="LogButton" onClick={() => { console.log(todos) }}>출력</Button>
+            {/* <Button className="LogButton" onClick={() => { console.log(todos) }}>출력</Button> */}
         </TodoListDiv>
     );
 }

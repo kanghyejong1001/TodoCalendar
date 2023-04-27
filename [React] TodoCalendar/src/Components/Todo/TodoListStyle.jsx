@@ -37,8 +37,10 @@ export const XButton = styled.button`
 `
 
 export const TextBox = styled.input`
+    width: 60%;
     text-align: center;
     padding: 0.1em;
+    margin: 0 10px;
     font-size: 1.2em;
     font-weight: bold;
     border: transparent;
@@ -46,6 +48,7 @@ export const TextBox = styled.input`
 `
 export const TodoRow = styled.div`
     display: flex;
+    align-items: center;
     padding-left: 0.2em;
     
 `
@@ -60,7 +63,7 @@ export const CheckBox = styled.input`
 `
 
 export const TodoList = styled.div`
-    padding: 10px 0;
+    padding: 10px 20px;
 `
 
 
