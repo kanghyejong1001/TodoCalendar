@@ -37,17 +37,20 @@ public class TodoService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public void updateTodoName(TodoUpdateRequest request) {
         Todo todo = todoRepository.findById(request.getTodoId())
                 .orElseThrow(IllegalAccessError::new);
         todoRepository.save(todo);
     }
 
+    @Transactional
     public void updateTodoDate(TodoUpdateRequest request) {
         Todo todo = todoRepository.findBytodoName(request.getTodoName());
         todoRepository.save(todo);
     }
 
+    @Transactional
     public void updateTodoToggle(TodoUpdateRequest request) {
         Todo todo = todoRepository.findBytodoName(request.getTodoName());
         todoRepository.save(new Todo(request.getTodoDate(),
