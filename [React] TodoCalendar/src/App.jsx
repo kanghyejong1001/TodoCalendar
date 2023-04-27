@@ -2,15 +2,22 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { useRef, useState } from "react"
 import LoginForm from "./Components/Login/LoginForm";
 import SignUpForm from "./Components/Login/SignUpForm";
-import Calendar from "./Components/Calendar/CalendarTwo";
-import { MainPage } from "./AppStyle.jsx";
+import {
+  Body,
+  CalendarDiv,
+  TimeDiv,
+  LogoutDiv,
+  LogoutButton,
+  TodoDiv,
+  NudgeDiv,
+  BookmarkDiv
+} from "./AppStyle.jsx";
 import Time from "./Components/Time/Time";
 
 
 function App() {
   const [checkId, setCheckId] = useState(true)
   const [isLogin, setIsLogin] = useState(true)
-
   // <button onClick=get()>GET</button>
   // <button onClick=post()>POST</button>
   // <button onClick=put()>PUT</button>
@@ -23,28 +30,42 @@ function App() {
   //     console.log(res)
   // }
   // const post = async () => {
-      // await request(``, { Method: 'POST', body: { day: 1 } }) 
-      // const res = await request(``)
-      // concole.log(res)
+  // await request(``, { Method: 'POST', body: { day: 1 } }) 
+  // const res = await request(``)
+  // concole.log(res)
   // }
   // const put = async () => {
-      // await request(`/${this.state.day}`, { Method: 'PUT', body: { day: 1 } })
-      // const res = await request(``)
-      // concole.log(res)
+  // await request(`/${this.state.day}`, { Method: 'PUT', body: { day: 1 } })
+  // const res = await request(``)
+  // concole.log(res)
   // }
   // const delete = async () => {
-      // await request(`/${this.state.day}`, { Method: 'DELETE' })
-      // const res = await request(``)
-      // concole.log(res)
+  // await request(`/${this.state.day}`, { Method: 'DELETE' })
+  // const res = await request(``)
+  // concole.log(res)
   // }
 
   return (
-    <body>
+    <Body>
       {isLogin
-        ? <MainPage>
-          <Time />
-          <Calendar setIsLogin={setIsLogin} />
-        </MainPage>
+        ?
+        <>
+
+          <TimeDiv>
+            <Time />
+          </TimeDiv>
+          <LogoutDiv>
+            <LogoutButton onClick={() => setIsLogin(false)}>로그아웃</LogoutButton>
+          </LogoutDiv>
+          <CalendarDiv>
+            {/* <Calendar setIsLogin={setIsLogin} /> */}
+
+          </CalendarDiv>
+          <TodoDiv></TodoDiv>
+          <NudgeDiv></NudgeDiv>
+          <BookmarkDiv></BookmarkDiv>
+
+        </>
         : (checkId
           ?
           <>
@@ -56,7 +77,7 @@ function App() {
           </>
         )
       }
-      {/* <TodoList todos={ todos } onToggle={ onToggle } onDelete={ onDelete } onInsert={onInsert} /> */}
+      {/* <TodoList todos={ todos } onToggle={ onToggle } onD~elete={ onDelete } onInsert={onInsert} /> */}
       {/* <button 
            onClick={() => {
              console.log(todos)
@@ -65,15 +86,15 @@ function App() {
          >
            현재
          </button> */}
-         
-         {/* <BrowserRouter>
+
+      {/* <BrowserRouter>
           <Routes>
             <Route index element={<Home />}/>
             <Route path="movie/:id" element={<MovieDetail />}/>
             <Route path="movies/:type" element={<MovieList />}/>
           </Routes>
         </BrowserRouter> */}
-    </body>
+    </Body>
   )
 }
 

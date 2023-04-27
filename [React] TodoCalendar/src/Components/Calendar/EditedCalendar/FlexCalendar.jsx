@@ -1,26 +1,24 @@
 import { useState } from "react";
 import moment from "moment";
-import TodoList from "../Todo/TodoListPage";
+import TodoList from "../../Todo/TodoListPage";
 
-import {
-    year,
-    month,
-    prevMonth,
-    nextMonth
-} from "../../Util/manageCalendar";
-import {
-    HeaderContainer,
-    Button,
-    MonthNavigator,
-    CurrentDate,
-    ButtonsDiv,
-    CalendarWrapper,
-    WeekdayWrapper,
-    DayWrapper,
-    TopDiv,
+import { 
+    year, 
+    month, 
+    prevMonth, 
+    nextMonth } from "../../../Util/manageCalendar";
+import { 
+    HeaderContainer, 
+    Button, 
+    MonthNavigator, 
+    CurrentDate, 
+    ButtonsDiv, 
+    CalendarWrapper, 
+    WeekdayWrapper, 
+    DayWrapper, 
+    TopDiv, 
     BottomDiv,
-    WholeCalendar
-} from "./CalendarTwoStyle";
+    WholeCalendar } from "./FlexCalendarStyle";
 
 function Calendar({ setIsLogin }) {
     const [dateObject, setDateObject] = useState(moment());
@@ -40,13 +38,14 @@ function Calendar({ setIsLogin }) {
                 <DayWrapper key={`day${d}`}>
                     <TopDiv>{d}</TopDiv>
                     <BottomDiv>
-                        <TodoList
+                    <TodoList
                             moment={{
                                 year: year(dateObject),
                                 month: month(dateObject),
                                 day: d,
                             }}
                         />
+                       
                     </BottomDiv>
                 </DayWrapper>
             );
@@ -57,23 +56,9 @@ function Calendar({ setIsLogin }) {
 
     return (
         <WholeCalendar>
-            <HeaderContainer>
-                <CurrentDate>{dateObject.format("Y년 M월")}</CurrentDate>
-                <ButtonsDiv>
-                    <Button onClick={() => setIsLogin(false)}>logout</Button>
-                    <MonthNavigator>
-                        <Button onClick={() => setDateObject(prevMonth(dateObject))}>
-                            {`${prevMonth(dateObject).format("M")}월`}
-                        </Button>
-                        <Button onClick={() => setDateObject(moment())}>이번 달</Button>
-                        <Button onClick={() => setDateObject(nextMonth(dateObject))}>
-                            {`${nextMonth(dateObject).format("M")}월`}
-                        </Button>
-                    </MonthNavigator>
-                </ButtonsDiv>
-            </HeaderContainer>
-
+            
             <CalendarWrapper>
+                <WeekdayWrapper></WeekdayWrapper>
                 {daysInWeek.map((day) => (
                     <WeekdayWrapper key={day}>{day}</WeekdayWrapper>
                 ))}
