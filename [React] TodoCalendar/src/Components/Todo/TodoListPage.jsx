@@ -2,8 +2,10 @@ import TodoListView from "./TodoListView";
 import { useState, useRef, useEffect } from "react";
 import { Input, Button, TodoListDiv, Form } from "./TodoListStyle";
 import { request } from "../../api/api";
+import { currentDay, year, month } from "../../Util/manageCalendar";
 
-function TodoList({ moment }) {
+
+function TodoList({ moment, dateObject, dragIndex, dragTodo, dragId, dragMoment, dragDelete }) {
     const [todos, setTodos] = useState([
         {
             id: 1,
@@ -36,16 +38,84 @@ function TodoList({ moment }) {
             moment: moment
         },
     ])
-
-    // useEffect(() => {
-    //     setTodos()
-    // }, [todos])
+    
+    // console.log(`/todos/${year(dateObject)}${month(dateObject)}${currentDay(dateObject)}`)
+    // const res = async () => await request(`/todos/${year(moment)}${month(moment)}${currentDay(moment)}`)
+    // const [todos, setTodos] = useState(res)
 
     const nextId = useRef(todos.length)
 
     const [text, setText] = useState('')
 
     const [delay, setDelay] = useState(false)
+
+    const onToggle = (id) => {
+        setTodos(
+            todos.map(todo =>
+                todo.id === id ? { ...todo, checked: !todo.checked } : todo
+            )
+        )
+        // async () => await request(`/todos/${year(moment)}${month(moment)}${currentDay(moment)}`, 
+        // { 
+        //     method: 'PUT',
+        //     body: {
+        //         todos
+        //     }
+        // })
+    }
+
+    const onDelete = (id) => {
+        setTodos(
+            todos.filter(todo => todo.id !== id)
+        )
+        if (todos.length === 1) {
+            nextId.current = 0
+        }
+        // async () => await request(`/todos/${year(moment)}${month(moment)}${currentDay(moment)}`, { method: 'DELETE' })
+    }
+    
+    // const onDelayChange = (e) => {
+    //     if(!delay) {
+    //         setDelay(true)
+    //         const temp = setInterval(() => {
+    //             setDelay(false)
+    //         }, 2000);
+    //         () => clearTimeout(temp);
+    //         onChange(e)
+    //     }
+    // } 
+    
+    const onChange = (e) => {
+        let {id, value} = e.target
+        id = parseInt(id)
+        id
+        ? onUpdate(id, value)
+        : setText(value)
+    }
+
+    const onUpdate = (id, text) => {
+        setTodos(
+            todos.map(item => {
+                if (item.id === id) {
+                    item.text = text
+                }
+                return item
+            })
+        )
+        // async () => await request(`/todos/${year(moment)}${month(moment)}${currentDay(moment)}`, 
+        // { 
+        //     method: 'PUT', 
+        //     body: {
+        //         todos
+        //     } 
+        // })
+    }
+
+    const onSubmit = (e) => {
+        onInsert(text)
+        setText('')
+        e.preventDefault()
+    }
 
     const onInsert = (text) => {
         setTodos(
@@ -59,90 +129,91 @@ function TodoList({ moment }) {
             ])
         )
         nextId.current++
+        // async () => await request(`/todos/${year(moment)}${month(moment)}${currentDay(moment)}`, 
+        // { 
+        //     method: 'POST', 
+        //     body: {
+        //         todos
+        //     } 
+        // })
     }
 
-    const onToggle = (id) => {
-        setTodos(
-            todos.map(todo =>
-                todo.id === id ? { ...todo, checked: !todo.checked } : todo
-            )
-        )
-    }
-
-    const onDelete = (id) => {
-        setTodos(
-            todos.filter(todo => todo.id !== id)
-        )
-        console.log(id)
-        if (todos.length === 1) {
-            nextId.current = 0
+    const onDrag = (e, index) => {
+        dragIndex.current = index
+        dragTodo.current = {
+            id: todos[index].id, 
+            text: todos[index].text,
+            checked: todos[index].checked,
+            moment: todos[index].moment
         }
-    }
-
-    useEffect(() => {
-        const temp = setTimeout(() => {
-            setDelay(false)
-        }, 2000)
-        return () => clearTimeout(temp)
-    }, [delay])
-
-    const onDelayChange = (e) => {
-        if (!delay) {
-            console.log(delay)
-            setDelay(true)
-            onChange(e)
-            console.log(delay)
+        dragId.current = todos[index].id
+        nextId.current = nextId.current === 1 ? 0 : nextId.current
+        dragMoment.current = todos[index].moment.day
+        dragDelete.current = {
+            'todoList': [...todos], 
+            'setTodoList': setTodos
         }
-    }
-
-    const onChange = (e) => {
-        console.log(todos)
-        parseInt(e.target.id)
-            ? onUpdate(e.target.id, e.target.value)
-            : setText(e.target.value)
-        console.log(todos)
-    }
-
-    const onUpdate = async (id, text) => {
-        setTodos(
-            todos.map(item => {
-                if (item.id === parseInt(id)) {
-                    item.text = text
-                }
-                return item
+    };
+    
+    const onDrop = (e, index) => {
+        const id = parseInt(e.target.closest('div').id)
+        if(dragMoment.current === id) {
+            const newTodos = [...todos]
+            newTodos.splice(dragIndex.current, 1)
+            newTodos.splice(index, 0, {
+                ...dragTodo.current,
+                id: ++nextId.current
             })
-        )
-    }
+            setTodos(newTodos)
+        } else{
+            const newTodos = [...todos]
+            newTodos.splice(index ? index : 0, 0, {
+                ...dragTodo.current,
+                id: ++nextId.current,
+                moment: {
+                    ...dragTodo.current.moment,
+                    day: id
+                }
+            })
+            e.target.closest('div').class === 'div' ? setTodos([newTodos[0]]) : setTodos(newTodos)
+            dragDelete.current.setTodoList(
+                dragDelete.current.todoList.filter(todo => {
+                    return todo.id !== dragId.current
+                })
+            )
+        }
+    };
+    
+    return (  
+        <TodoListDiv 
+            id={moment.day}
+            className='div'
+            draggable
+            onDrop={onDrop}
+            onDragOver={(e) => e.preventDefault()}
+        >
+            <div>
+                <form onSubmit={onSubmit}>
+                    <Input 
+                        id="0"
+                        type="text" 
+                        placeholder="할 일 입력"
+                        value={text}
+                        onChange={onChange}
+                    />
+                    <Button type="submit">save</Button>
+                </form>
+            </div>        
 
-
-    const onSubmit = (e) => {
-        onInsert(text)
-        setText('')
-        e.preventDefault()
-    }
-
-    return (
-
-        <TodoListDiv>
-            <Form onSubmit={onSubmit}>
-                <Input
-                    id="0"
-                    type="text"
-                    placeholder="할 일"
-                    value={text}
-                    onChange={onChange}
-                    
-                />
-                <Button type="submit">저장</Button>
-            </Form>
             {todos.map((todo, index) => (
                 <TodoListView
                     key={todo.id}
                     todo={todo}
-                    index={index}
                     onToggle={onToggle}
                     onDelete={onDelete}
-                    onChange={onDelayChange}
+                    onChange={onChange}
+                    onDrag={(e) => onDrag(e, index)}
+                    onDrop={(e) => onDrop(e, index)}
                 />
             ))}
             <Button onClick={() => { console.log(todos) }}></Button>

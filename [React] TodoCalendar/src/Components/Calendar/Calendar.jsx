@@ -21,6 +21,12 @@ function Calendar({ setIsLogin }) {
         </DayWrapper>
     ));
 
+    const dragIndex = useRef()
+    const dragTodo = useRef()
+    const dragId = useRef()
+    const dragMoment = useRef()
+    const dragDelete = useRef()
+
     // // 달력에 날짜가 있는 부분
     let daysInMonthArr = [];
     // // useMemo(() => setTodoList([]), [dateObject])
@@ -30,18 +36,26 @@ function Calendar({ setIsLogin }) {
                 <OneDay>
                     <DayTop>{d}</DayTop>
                     <DayBottom>
-                        <TodoList moment={{
-                            year: year(dateObject),
-                            month: month(dateObject),
-                            day: d
-                        }} />
+                        <TodoList 
+                            moment={
+                                {
+                                    year: year(dateObject),
+                                    month: month(dateObject),
+                                    day: d
+                                }
+                            } 
+                            dateObject={dateObject}
+                            dragIndex={dragIndex}
+                            dragTodo={dragTodo}
+                            dragId={dragId}
+                            dragMoment={dragMoment}
+                            dragDelete={dragDelete}
+                        />
                     </DayBottom>
                 </OneDay>
             </DayWrapper>
         );
     }
-
-
 
     // rows에 앞에서 만든 빈칸들을 7개씩 잘라서 저장
     const rows = [];
