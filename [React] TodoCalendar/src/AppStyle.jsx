@@ -22,7 +22,7 @@ const LogoutDiv = styled.div`
     position: relative;
     grid-row: 1 / 2;
     grid-column: 3 / 4;
-    background: red;
+    background: blue;
 `;
 
 const LogoutButton = styled.button`
@@ -33,7 +33,6 @@ const LogoutButton = styled.button`
     border-radius: 30px;
     border: transparent;
     padding: 5px;
-    font-size: 1px;
     cursor: pointer;
     font-weight: bold;
 
@@ -54,7 +53,7 @@ const TodoDiv = styled.div`
     background: green;
 `;
 
-const NudgeDiv = styled.div`
+const DdayDiv = styled.div`
     grid-row: 3 / 4;
     grid-column: 2 / 3;
     background: pink;
@@ -79,6 +78,6 @@ export {
     LogoutButton,
     TodoDiv,
     TimeDiv,
-    NudgeDiv,
+    DdayDiv,
     BookmarkDiv
 }

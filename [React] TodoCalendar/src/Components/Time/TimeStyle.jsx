@@ -13,11 +13,9 @@ const DateDiv = styled.div`
 `;
 
 const TopDiv = styled.div`
-  font-size: 0.5em;
 `;
 
 const BottomDiv = styled.div`
-  font-size: 1em;
 `;
 
 // 하얀색 둥근 박스 - DateDiv와 TimeDiv 담음

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import moment from "moment";
-import TodoList from "../Todo/TodoListPage";
 
 import {
     year,
@@ -11,16 +10,21 @@ import {
 import {
     HeaderContainer,
     Button,
-    CurrentMY,
+    CurrentDate,
     CalendarWrapper,
     WeekdayWrapper,
     DayWrapper,
     TopDiv,
     BottomDiv,
-    WholeCalendar
-} from "./TodayTodoListStyle";
+    WholeCalendar,
+    ViewChangeButton,
+    HeaderTop,
+    HeaderBottom
 
-function TodayTodoList({ setIsLogin }) {
+
+} from "./MiniCalendarStyle";
+
+function MiniCalendar() {
     const [dateObject, setDateObject] = useState(moment());
 
     const daysInWeek = moment.weekdaysShort();
@@ -38,13 +42,6 @@ function TodayTodoList({ setIsLogin }) {
                 <DayWrapper key={`day${d}`}>
                     <TopDiv>{d}</TopDiv>
                     <BottomDiv>
-                        {/* <TodoList
-                            moment={{
-                                year: year(dateObject),
-                                month: month(dateObject),
-                                day: d,
-                            }}
-                        /> */}
                     </BottomDiv>
                 </DayWrapper>
             );
@@ -56,12 +53,31 @@ function TodayTodoList({ setIsLogin }) {
     return (
         <WholeCalendar>
             <HeaderContainer>
-                <Button className="LeftButton" onClick={() => setDateObject(prevMonth(dateObject))}></Button>
-                <CurrentMY>{dateObject.format("Y년 M월")}</CurrentMY>
-                <Button className="RightButton" onClick={() => setDateObject(nextMonth(dateObject))}>
+                <HeaderTop>
+                    <ViewChangeButton>
+                        <Button>
+                            Day
+                        </Button>
+                        <Button>
+                            Week
+                        </Button>
+                        <Button>
+                            Month
+                        </Button>
+                        <Button>
+                            +
+                        </Button>
+                    </ViewChangeButton>
+                </HeaderTop>
+                <HeaderBottom>
+                    <Button className="LeftButton" onClick={() => setDateObject(prevMonth(dateObject))}>
+                    </Button>
+                    <CurrentDate>{dateObject.format("Y년 M월")}</CurrentDate>
+                    <Button className="RightButton" onClick={() => setDateObject(nextMonth(dateObject))}>
+                    </Button>
 
-                </Button>
-                {/* <Button onClick={() => setDateObject(moment())}>이번 달</Button> */}
+                </HeaderBottom>
+
             </HeaderContainer>
 
             <CalendarWrapper>
@@ -74,4 +90,4 @@ function TodayTodoList({ setIsLogin }) {
     );
 }
 
-export default TodayTodoList;
+export default MiniCalendar;

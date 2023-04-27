@@ -9,11 +9,13 @@ import {
   LogoutDiv,
   LogoutButton,
   TodoDiv,
-  NudgeDiv,
+  DdayDiv,
   BookmarkDiv
 } from "./AppStyle.jsx";
 import Time from "./Components/Time/Time";
-
+import BookMark from "./Components/BookMark/BookMark";
+import Dday from "./Components/Dday/Dday";
+import MiniCalendar from "./Components/Calendar/MiniCalendar";
 
 function App() {
   const [checkId, setCheckId] = useState(true)
@@ -59,11 +61,15 @@ function App() {
           </LogoutDiv>
           <CalendarDiv>
             {/* <Calendar setIsLogin={setIsLogin} /> */}
-
+            <MiniCalendar/>
           </CalendarDiv>
           <TodoDiv></TodoDiv>
-          <NudgeDiv></NudgeDiv>
-          <BookmarkDiv></BookmarkDiv>
+          <DdayDiv>
+            <Dday />
+          </DdayDiv>
+          <BookmarkDiv>
+            <BookMark />
+          </BookmarkDiv>
 
         </>
         : (checkId
