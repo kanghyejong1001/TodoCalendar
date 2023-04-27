@@ -4,25 +4,25 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 public class TodoCreateRequest {
-    private String todoName;
     private Date todoDate;
-    private String startTime;
-    private String endTime;
+    private String todoName;
+    private boolean toggle;
 
-
-    public String getTodoName() {
-        return todoName;
+    public TodoCreateRequest(Date todoDate, String todoName, boolean toggle) {
+        this.todoDate = todoDate;
+        this.todoName = todoName;
+        this.toggle = toggle;
     }
 
     public Date getTodoDate() {
         return todoDate;
     }
 
-    public String getStartTime() {
-        return startTime;
+    public String getTodoName() {
+        return todoName;
     }
 
-    public String getEndTime() {
-        return endTime;
+    public boolean isToggle() {
+        return toggle;
     }
 }

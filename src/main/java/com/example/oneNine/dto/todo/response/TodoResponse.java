@@ -5,36 +5,30 @@ import java.util.Date;
 
 public class TodoResponse {
     private long todoId;
-    private String todoName;
     private Date todoDate;
-    private String startTime;
-    private String endTime;
+    private String todoName;
+    private boolean todoToggle;
 
-    public TodoResponse(long todoId, String todoName, Date todoDate, String startTime, String endTime) {
+    public TodoResponse(long todoId, Date todoDate, String todoName, boolean todoToggle) {
         this.todoId = todoId;
         this.todoName = todoName;
         this.todoDate = todoDate;
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.todoToggle = todoToggle;
     }
 
     public long getTodoId() {
         return todoId;
     }
 
-    public String getTodoName() {
-        return todoName;
-    }
-
     public Date getTodoDate() {
         return todoDate;
     }
 
-    public String getStartTime() {
-        return startTime;
+    public String getTodoName() {
+        return todoName;
     }
 
-    public String getEndTime() {
-        return endTime;
+    public boolean isTodoToggle() {
+        return todoToggle;
     }
 }
