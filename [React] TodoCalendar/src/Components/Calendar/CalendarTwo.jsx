@@ -2,24 +2,25 @@ import { useState } from "react";
 import moment from "moment";
 import TodoList from "../Todo/TodoListPage";
 
-import { 
-    year, 
-    month, 
-    prevMonth, 
-    nextMonth } from "../../Util/manageCalendar";
-import { 
-    HeaderContainer, 
-    Button, 
-    MonthNavigator, 
-    CurrentDate, 
-    ButtonsDiv, 
-    CalendarWrapper, 
-    WeekdayWrapper, 
-    DayWrapper, 
-    TopDiv, 
+import {
+    year,
+    month,
+    prevMonth,
+    nextMonth
+} from "../../Util/manageCalendar";
+import {
+    HeaderContainer,
+    Button,
+    MonthNavigator,
+    CurrentDate,
+    ButtonsDiv,
+    CalendarWrapper,
+    WeekdayWrapper,
+    DayWrapper,
+    TopDiv,
     BottomDiv,
     WholeCalendar
-    } from "./CalendarTwoStyle";
+} from "./CalendarTwoStyle";
 
 function Calendar({ setIsLogin }) {
     const [dateObject, setDateObject] = useState(moment());

@@ -36,16 +36,20 @@ export const XButton = styled.button`
     }
 `
 
-export const TextBox = styled.input`
-    width: 60%;
-    text-align: center;
+export const TextBox = styled.textarea`
+    width: 80%;
     padding: 0.1em;
     margin: 0 10px;
+    overflow: hidden;
+    resize: both;
     font-size: 1.2em;
     font-weight: bold;
     border: transparent;
     box-sizing: border-box;
+
 `
+
+
 export const TodoRow = styled.div`
     display: flex;
     align-items: center;
@@ -57,7 +61,6 @@ export const CheckBox = styled.input`
 
     height: 1.3em;
     width: 1.3em;
-
     &:hover {
     }
 `
