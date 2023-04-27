@@ -2,8 +2,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { useRef, useState } from "react"
 import LoginForm from "./Components/Login/LoginForm";
 import SignUpForm from "./Components/Login/SignUpForm";
-import Calendar from "./Components/Calendar/CalendarEdit";
-import { Root } from "./AppStyle.jsx";
+import Calendar from "./Components/Calendar/CalendarTwo";
+import { MainPage } from "./AppStyle.jsx";
 import Time from "./Components/Time/Time";
 
 
@@ -39,33 +39,41 @@ function App() {
   // }
 
   return (
-        { isLogin 
-          ? <Calendar setIsLogin={setIsLogin}/> 
-          : ( checkId 
-              ? <LoginForm setIsLogin={setIsLogin} setCheckId={setCheckId}/> 
-              : <SignUpForm setCheckId={setCheckId}/>
-          )
-        }        
-
-        {/* <TodoList todos={ todos } onToggle={ onToggle } onDelete={ onDelete } onInsert={onInsert} /> */}
-        {/* <button 
-          onClick={() => {
-            console.log(todos)
-            console.log(nextId.current)
-          }}
-        >
-          현재
-        </button> */}
-
-
-        {/* <BrowserRouter>
+    <body>
+      {isLogin
+        ? <MainPage>
+          <Time />
+          <Calendar setIsLogin={setIsLogin} />
+        </MainPage>
+        : (checkId
+          ?
+          <>
+            <LoginForm setIsLogin={setIsLogin} setCheckId={setCheckId} />
+          </>
+          :
+          <>
+            <SignUpForm setCheckId={setCheckId} />
+          </>
+        )
+      }
+      {/* <TodoList todos={ todos } onToggle={ onToggle } onDelete={ onDelete } onInsert={onInsert} /> */}
+      {/* <button 
+           onClick={() => {
+             console.log(todos)
+             console.log(nextId.current)
+           }}
+         >
+           현재
+         </button> */}
+         
+         {/* <BrowserRouter>
           <Routes>
             <Route index element={<Home />}/>
             <Route path="movie/:id" element={<MovieDetail />}/>
             <Route path="movies/:type" element={<MovieList />}/>
           </Routes>
         </BrowserRouter> */}
-    </div>
+    </body>
   )
 }
 

@@ -2,22 +2,25 @@ import { useState } from "react";
 import moment from "moment";
 import TodoList from "../Todo/TodoListPage";
 
-import { 
-    year, 
-    month, 
-    prevMonth, 
-    nextMonth } from "../../Util/manageCalendar";
-import { 
-    HeaderContainer, 
-    Button, 
-    MonthNavigator, 
-    CurrentDate, 
-    ButtonsDiv, 
-    CalendarWrapper, 
-    WeekdayWrapper, 
-    DayWrapper, 
-    TopDiv, 
-    BottomDiv } from "./CalendarEditStyle";
+import {
+    year,
+    month,
+    prevMonth,
+    nextMonth
+} from "../../Util/manageCalendar";
+import {
+    HeaderContainer,
+    Button,
+    MonthNavigator,
+    CurrentDate,
+    ButtonsDiv,
+    CalendarWrapper,
+    WeekdayWrapper,
+    DayWrapper,
+    TopDiv,
+    BottomDiv,
+    WholeCalendar
+} from "./CalendarTwoStyle";
 
 function Calendar({ setIsLogin }) {
     const [dateObject, setDateObject] = useState(moment());
@@ -53,7 +56,7 @@ function Calendar({ setIsLogin }) {
     };
 
     return (
-        <>
+        <WholeCalendar>
             <HeaderContainer>
                 <CurrentDate>{dateObject.format("Y년 M월")}</CurrentDate>
                 <ButtonsDiv>
@@ -76,7 +79,7 @@ function Calendar({ setIsLogin }) {
                 ))}
                 {daysInMonthArr()}
             </CalendarWrapper>
-        </>
+        </WholeCalendar>
     );
 }
 

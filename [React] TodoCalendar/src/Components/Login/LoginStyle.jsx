@@ -38,10 +38,11 @@ export const ErrorText = styled.span`
 
 export const Input = styled.input`    
     color: black;
+    font-size: 1em;
     font-weight: bold;
     display: block;
     margin: 0 100px 0;
-    padding: 20px 30px;
+    padding: 20px 0px 20px 20px;
     width: 80%;
     height: 24px;
     border-radius: 20px;

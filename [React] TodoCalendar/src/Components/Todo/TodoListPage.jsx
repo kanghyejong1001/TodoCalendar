@@ -200,6 +200,7 @@ function TodoList({ moment, dateObject, dragIndex, dragTodo, dragId, dragMoment,
                         placeholder="할 일 입력"
                         value={text}
                         onChange={onChange}
+                        autoComplete="off"
                     />
                     <Button type="submit">save</Button>
                 </form>
@@ -216,7 +217,7 @@ function TodoList({ moment, dateObject, dragIndex, dragTodo, dragId, dragMoment,
                     onDrop={(e) => onDrop(e, index)}
                 />
             ))}
-            <Button onClick={() => { console.log(todos) }}></Button>
+            {/* <Button className="LogButton" onClick={() => { console.log(todos) }}>출력</Button> */}
         </TodoListDiv>
     );
 }

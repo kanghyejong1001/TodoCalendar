@@ -1,10 +1,9 @@
 import styled from "@emotion/styled";
 
-export const Root = styled.div`
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 100px 0;
+export const MainPage = styled.div`
+margin-top: 100px;
+position: relative;
+display: flex;
+flex-direction: column;
+align-items: center;
 `;
