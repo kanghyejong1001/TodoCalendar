@@ -7,42 +7,48 @@ const Body = styled.div`
     height: 100vh;
     border: black solid 1px;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    gap: 10px;
+    grid-template-columns: 2fr 3fr 2fr;
+    grid-template-rows: 1fr 3fr 1fr;
 `;
 
 const TimeDiv = styled.div`
     grid-row: 1 / 2;
     grid-column: 1 / 3;
     background: red;
+
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 const LogoutDiv = styled.div`
     position: relative;
     grid-row: 1 / 2;
     grid-column: 3 / 4;
-    background: blue;
 `;
 
 const LogoutButton = styled.button`
     position: absolute;
     top: 0;
     right: 0;
-    background-color: #E2EAFF;
+    background-color: #fff;
     border-radius: 30px;
     border: transparent;
-    padding: 5px;
+    padding: 15px;
     cursor: pointer;
     font-weight: bold;
+    margin: 20px 20px 0 0;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 
     &:hover {
         color: #fff;
-        background-color: #82A4FF;
+        background-color: grey;
       }
       
     &:active {
-        background-color: grey;
+        background-color: black;
       }
 `;
 
@@ -68,7 +74,6 @@ const BookmarkDiv = styled.div`
 const CalendarDiv = styled.div`
     grid-row: 2 / 4;
     grid-column: 3 / 4;
-    background: yellow;
 `;
 
 export {

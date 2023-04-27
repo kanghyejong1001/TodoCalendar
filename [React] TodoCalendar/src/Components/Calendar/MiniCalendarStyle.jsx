@@ -7,20 +7,59 @@ export const boxStyles = `
 
 const WholeCalendar = styled.div`
     padding: 32px;
+    background: white;
+    margin: 0 10px;
+    ${boxStyles};
 `;
 
 const HeaderContainer = styled.div`
   display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100px;
+  margin-bottom: 25px;
+  
+`;
+
+const HeaderTop = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  width: 100%;
+  
+`;
+
+const HeaderBottom = styled.div`
+  display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px 0;
-  margin-bottom: 25px;
-  ${boxStyles};
   
+`;
+
+const ViewChangeDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-left: 10px;
+  width: 40%;
 `;
 
 const Button = styled.button`
   font-weight: bold;
+  font-size: 1em;
+  background: none;
+  padding: 0;
+
+  &:hover {
+    background: none;
+    color: grey;
+  }
+
+  &:active {
+    background: none;
+    color: white;
+  }
 
 
   &.LeftButton:after {
@@ -31,6 +70,10 @@ const Button = styled.button`
     content: '>';
   }
 
+  &.Plus {
+    margin-right: 10px;
+  }
+
 
 `;
 
@@ -38,6 +81,7 @@ const Button = styled.button`
 const CurrentDate = styled.div`
   padding: 0 25px;
   font-weight: bold;
+  font-size: 1.2em;
 `;
 
 const CalendarWrapper = styled.div`
@@ -51,7 +95,6 @@ const WeekdayWrapper = styled.div`
   align-items: flex-start;
   font-weight: bold;
   padding: 5px;
-  ${boxStyles};
 `;
 
 const DayWrapper = styled.div`
@@ -59,17 +102,33 @@ const DayWrapper = styled.div`
   flex-direction: column;
   margin: 5px;
   padding: 10px;
-  ${boxStyles};
+  text-align: center;
+  /*${boxStyles};*/
 `;
 
+
 const TopDiv = styled.div`
-  padding: 5px 10px;
+  color: ${props => {
+    
+    return props.isWeekend === 0 ? 'blue' : 
+           props.isWeekend === 6 ? 'red' : 'black';
+  }};
 `;
+
+
+
+
 
 const BottomDiv = styled.div`
     //
 `;
 
+const TodayMark = styled.div`
+  display: inline;
+  padding: 5px;
+  border-radius: 50%;
+  background: ${props => props.isToday ? 'red' : 'transparent'};
+`;
 
 
 export {
@@ -81,5 +140,9 @@ export {
   WeekdayWrapper,
   DayWrapper,
   TopDiv,
-  BottomDiv
+  BottomDiv,  
+  ViewChangeDiv,
+  HeaderTop,
+  HeaderBottom,
+  TodayMark
 };

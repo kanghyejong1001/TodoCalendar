@@ -5,8 +5,10 @@ import {
     year,
     month,
     prevMonth,
-    nextMonth
+    nextMonth,
+    currentDay
 } from "../../Util/manageCalendar";
+
 import {
     HeaderContainer,
     Button,
@@ -17,9 +19,10 @@ import {
     TopDiv,
     BottomDiv,
     WholeCalendar,
-    ViewChangeButton,
+    ViewChangeDiv,
     HeaderTop,
-    HeaderBottom
+    HeaderBottom,
+    TodayMark
 
 
 } from "./MiniCalendarStyle";
@@ -40,7 +43,12 @@ function MiniCalendar() {
         for (let d = 1; d <= moment(dateObject).daysInMonth(); d++) {
             daysInMonthArray.push(
                 <DayWrapper key={`day${d}`}>
-                    <TopDiv>{d}</TopDiv>
+                    <TopDiv>
+                        <TodayMark 
+                        isToday={d === parseInt(currentDay(dateObject)) ? true : false}>
+                            {d}
+                        </TodayMark>
+                    </TopDiv>
                     <BottomDiv>
                     </BottomDiv>
                 </DayWrapper>
@@ -54,7 +62,7 @@ function MiniCalendar() {
         <WholeCalendar>
             <HeaderContainer>
                 <HeaderTop>
-                    <ViewChangeButton>
+                    <ViewChangeDiv>
                         <Button>
                             Day
                         </Button>
@@ -64,10 +72,10 @@ function MiniCalendar() {
                         <Button>
                             Month
                         </Button>
-                        <Button>
-                            +
-                        </Button>
-                    </ViewChangeButton>
+                    </ViewChangeDiv>
+                    <Button className="Plus">
+                        +
+                    </Button>
                 </HeaderTop>
                 <HeaderBottom>
                     <Button className="LeftButton" onClick={() => setDateObject(prevMonth(dateObject))}>

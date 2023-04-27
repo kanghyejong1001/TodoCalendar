@@ -7,7 +7,8 @@ import {
     DateDiv,
     TimeAndDate,
     TopDiv,
-    BottomDiv
+    BottomDiv,
+    Separator
 } from "./TimeStyle.jsx";
 
 import {
@@ -52,6 +53,7 @@ export default function Time() {
                 <TopDiv>현재 시간은</TopDiv>
                 <BottomDiv>{timer}</BottomDiv>
             </TimeDiv>
+            <Separator></Separator>
             <DateDiv>
                 <TopDiv>{year(moment())}년 {month(moment())}월 {day(moment())}일</TopDiv>
                 <BottomDiv>{dayOfTheWeek}</BottomDiv>
