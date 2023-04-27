@@ -15,7 +15,7 @@ function TodoListView({ todo, onToggle, onDelete, onChange, onDrag, onDrop }) {
             <input  type="checkbox"  onChange={() => onToggle(id)} checked={checked} />
             <span>
                 {/* {index + 1}. {text + '/' + moment.month} */}
-                <input id={id} type="text" defaultValue={text} onChange={onChange} />
+                <textarea id={id} type="text" defaultValue={text} onChange={onChange} />
                 <button onClick={() => onDelete(id)}>x</button>
             </span>
         </div>

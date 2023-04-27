@@ -41,7 +41,6 @@ function App() {
   return (
     <div>
 
-        {/* <Time /> */}
         { isLogin 
           ? <Calendar setIsLogin={setIsLogin}/> 
           : ( checkId 
@@ -59,6 +58,8 @@ function App() {
         >
           현재
         </button> */}
+
+
         {/* <BrowserRouter>
           <Routes>
             <Route index element={<Home />}/>

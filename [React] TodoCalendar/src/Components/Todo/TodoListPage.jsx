@@ -91,7 +91,6 @@ function TodoList({ moment, dateObject, dragIndex, dragTodo, dragId, dragMoment,
         id
         ? onUpdate(id, value)
         : setText(value)
-        console.log(value)
     }
 
     const onUpdate = (id, text) => {
@@ -141,87 +140,57 @@ function TodoList({ moment, dateObject, dragIndex, dragTodo, dragId, dragMoment,
 
     const onDrag = (e, index) => {
         dragIndex.current = index
-        const id = todos[index].id
-        const text = todos[index].text
-        const checked = todos[index].checked
-        const moment = todos[index].moment
-        const day = moment.day
         dragTodo.current = {
-            id: id, 
-            text: text,
-            checked: checked,
-            moment: moment
+            id: todos[index].id, 
+            text: todos[index].text,
+            checked: todos[index].checked,
+            moment: todos[index].moment
         }
-        dragId.current = id
+        dragId.current = todos[index].id
         nextId.current = nextId.current === 1 ? 0 : nextId.current
-        dragMoment.current = day
-        
-
+        dragMoment.current = todos[index].moment.day
         dragDelete.current = {
             'todoList': [...todos], 
             'setTodoList': setTodos
         }
-        // console.log('index', dragIndex.current)
-        // console.log('todo', dragTodo.current)
-        // console.log('id', dragId.current)
-        // console.log('moment', dragMoment.current)
-        // console.log('delete', dragDelete.current)
-        console.log('-------------------------------')
     };
     
     const onDrop = (e, index) => {
         const id = parseInt(e.target.closest('div').id)
-        console.log(dragDelete.current.todoList)
         if(dragMoment.current === id) {
-            console.log("if")
             const newTodos = [...todos]
-            console.log(dragTodo.current)
-            dragTodo.current.id = ++nextId.current
             newTodos.splice(dragIndex.current, 1)
-            newTodos.splice(index, 0, dragTodo.current)
+            newTodos.splice(index, 0, {
+                ...dragTodo.current,
+                id: ++nextId.current
+            })
             setTodos(newTodos)
         } else{
-            console.log("else")
-            console.log(id)
             const newTodos = [...todos]
-            
-            // const tempId = dragTodo.current.id
-            const tempText = dragTodo.current.text
-            const tempChecked = dragTodo.current.checked
-            const tempMoment = dragTodo.current.moment
-            const newTodo = {
+            newTodos.splice(index ? index : 0, 0, {
+                ...dragTodo.current,
                 id: ++nextId.current,
-                text: tempText,
-                checked: tempChecked,
                 moment: {
-                    year: tempMoment.year,
-                    month: tempMoment.month,
+                    ...dragTodo.current.moment,
                     day: id
                 }
-            }
-            // dragTodo.current.moment.day = id
-            // dragTodo.current.id = ++nextId.current
-            newTodos.splice(index, 0, newTodo)
-            console.log(dragDelete.current)
-            setTodos(newTodos)
+            })
+            e.target.closest('div').class === 'div' ? setTodos([newTodos[0]]) : setTodos(newTodos)
             dragDelete.current.setTodoList(
                 dragDelete.current.todoList.filter(todo => {
                     return todo.id !== dragId.current
                 })
             )
         }
-        console.log('-------------------------------')
-        // if (e.target.closest('div').id === 'div') {
-        //     console.log('div')
-        //     setTodos([dragTodo.current])
-        // }
     };
     
     return (  
-        
         <TodoListDiv 
-            id='div'
+            id={moment.day}
+            className='div'
             draggable
+            onDrop={onDrop}
+            onDragOver={(e) => e.preventDefault()}
         >
             <div>
                 <form onSubmit={onSubmit}>
