@@ -51,6 +51,7 @@ export const TextBox = styled.textarea`
 
 
 export const TodoRow = styled.div`
+    padding: 10px 20px;
     display: flex;
     align-items: center;
     padding-left: 0.2em;
@@ -64,12 +65,6 @@ export const CheckBox = styled.input`
     &:hover {
     }
 `
-
-export const TodoList = styled.div`
-    padding: 10px 20px;
-`
-
-
 
 export const TodoListDiv = styled.div`
     margin-bottom: 1em;

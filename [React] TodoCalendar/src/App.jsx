@@ -2,9 +2,12 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { useRef, useState } from "react"
 import LoginForm from "./Components/Login/LoginForm";
 import SignUpForm from "./Components/Login/SignUpForm";
-import Calendar from "./Components/Calendar/CalendarTwo";
+import Calendar from "./Components/Calendar/Calendar";
 import { MainPage } from "./AppStyle.jsx";
 import Time from "./Components/Time/Time";
+import Dday from "./Components/Dday/Dday";
+import BookMark from "./Components/BookMark/BookMark";
+import TodayTodoList from "./Components/TodayTodoList/TodayTodoList";
 
 
 function App() {
@@ -39,8 +42,11 @@ function App() {
   // }
 
   return (
-    <body>
-      {isLogin
+    <div className="body">
+      {/* <TodayTodoList/> */}
+      <Dday/>
+      {/* <BookMark/> */}
+      {/* {isLogin
         ? <MainPage>
           <Time />
           <Calendar setIsLogin={setIsLogin} />
@@ -55,25 +61,16 @@ function App() {
             <SignUpForm setCheckId={setCheckId} />
           </>
         )
-      }
-      {/* <TodoList todos={ todos } onToggle={ onToggle } onDelete={ onDelete } onInsert={onInsert} /> */}
-      {/* <button 
-           onClick={() => {
-             console.log(todos)
-             console.log(nextId.current)
-           }}
-         >
-           현재
-         </button> */}
-         
-         {/* <BrowserRouter>
-          <Routes>
-            <Route index element={<Home />}/>
-            <Route path="movie/:id" element={<MovieDetail />}/>
-            <Route path="movies/:type" element={<MovieList />}/>
-          </Routes>
-        </BrowserRouter> */}
-    </body>
+      } */}
+      
+      {/* <BrowserRouter>
+        <Routes>
+          <Route index element={<Home />}/>
+          <Route path="movie/:id" element={<MovieDetail />}/>
+          <Route path="movies/:type" element={<MovieList />}/>
+        </Routes>
+      </BrowserRouter> */}
+    </div>
   )
 }
 
