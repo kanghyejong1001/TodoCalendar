@@ -52,9 +52,6 @@ function App() {
   return (
 
     <Body isLogin={isLogin}>
-      {/* <TodayTodoList/> */}
-      {/* <Dday/> */}
-      {/* <BookMark/> */}
       {isLogin
         ?
         <>
@@ -68,7 +65,7 @@ function App() {
             {/* <Calendar setIsLogin={setIsLogin} /> */}
             <MiniCalendar/>
           </CalendarDiv>
-          <TodoDiv></TodoDiv>
+          <TodoDiv><TodayTodoList/></TodoDiv>
           <DdayDiv>
             <Dday />
           </DdayDiv>

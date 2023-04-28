@@ -1,4 +1,4 @@
-const API_END_POINT = ''
+const API_END_POINT = 'https://localhost:7070'
 
 // export const request = (url) => {
 //     return fetch(`${API_END_POINT}${url}`)
