@@ -5,81 +5,92 @@ export const boxStyles = `
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 `;
 
-export const OuterBox = styled.div`
-  background-color: white;
-  padding: 100px;
-  ${boxStyles};
+const WholeCalendar = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: scale(0.7);
+  transform-origin: top;
 `;
 
-export const Button = styled.button`
-  width: 150px;
-  font-size: 25px;
-`;
-
-export const GridItem = styled.div`
-  /* add your styling properties here */
-`;
-
-export const HeaderContainer = styled.div`
+const HeaderContainer = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
   padding: 40px 30px;
+  margin-bottom: 30px;
+  width: 90%;
+  ${boxStyles};
+  
 `;
 
-export const ButtonsDiv = styled.div`
+const Button = styled.button`
+  font-size: 2.0em;
+  font-weight: bold;
+  margin: 0 10px;  
+`;
+
+const MonthNavigator = styled.div`
   display: flex;
   justify-content: space-between;
 `;
 
-export const MonthNavigator = styled.div`
+const CurrentDate = styled.div`
+  padding: 25px;
+  font-weight: bold;
+  font-size: 4.0em;
+`;
+
+const ButtonsDiv = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 500px;
 `;
 
-export const CurrentDate = styled.div`
-  margin: 10px 0;
-  font-weight: bold;
-  font-size: 60px;
+const CalendarWrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
 `;
 
-export const TableHeader = styled.th`
-  height: 50px;
-  text-align: center;
-  color: black;
+const WeekdayWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  font-size: 4.0em;
   font-weight: bold;
-  font-size: 40px;
+  padding: 5px;
   ${boxStyles};
 `;
 
-
-export const DayWrapper = styled.td`
+const DayWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  padding: 10px;
   ${boxStyles};
-  position: relative; /* add position relative */
 `;
 
-export const OneDay = styled.div`
-    display: flex;
-    flex-direction: column;
-    background-color: purple;
-    padding: 10px;
-`
-
-export const DayTop = styled.div`
-    padding: 0 10px;
-    background-color: green;
-    font-weight: bold;
-    font-size: 35px;
+const TopDiv = styled.div`
+  font-size: 2.5em;
+  padding: 5px 10px;
 `;
 
-export const DayBottom = styled.div`
-    height: 80%;
-    background-color: blue;
-    align-self: flex-start;
+const BottomDiv = styled.div`
+    //
 `;
 
-export const Row = styled.tr`
 
 
-`;
+export {
+  WholeCalendar,
+  HeaderContainer,
+  Button,
+  MonthNavigator,
+  CurrentDate,
+  ButtonsDiv,
+  CalendarWrapper,
+  WeekdayWrapper,
+  DayWrapper,
+  TopDiv,
+  BottomDiv
+};
