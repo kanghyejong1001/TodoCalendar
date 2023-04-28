@@ -16,6 +16,8 @@ import Time from "./Components/Time/Time";
 import BookMark from "./Components/BookMark/BookMark";
 import Dday from "./Components/Dday/Dday";
 import MiniCalendar from "./Components/Calendar/MiniCalendar";
+import Calendar from "./Components/Calendar/Calendar";
+import TodayTodoList from "./Components/TodayTodoList/TodayTodoList";
 
 function App() {
   const [checkId, setCheckId] = useState(true)
@@ -48,7 +50,11 @@ function App() {
   // }
 
   return (
+
     <Body isLogin={isLogin}>
+      {/* <TodayTodoList/> */}
+      {/* <Dday/> */}
+      {/* <BookMark/> */}
       {isLogin
         ?
         <>
@@ -81,6 +87,7 @@ function App() {
             <SignUpForm setCheckId={setCheckId} />
           </>
         )
+
       }
       {/* <TodoList todos={ todos } onToggle={ onToggle } onD~elete={ onDelete } onInsert={onInsert} /> */}
       {/* <button 

@@ -5,7 +5,7 @@ import { request } from "../../api/api";
 import { currentDay, year, month } from "../../Util/manageCalendar";
 
 
-function TodoList({ moment, dateObject, dragIndex, dragTodo, dragId, dragMoment, dragDelete }) {
+function TodoList({ moment, dragIndex, dragTodo, dragId, dragMoment, dragDelete }) {
     const [todos, setTodos] = useState([
         {
             id: 1,
@@ -156,8 +156,9 @@ function TodoList({ moment, dateObject, dragIndex, dragTodo, dragId, dragMoment,
     };
     
     const onDrop = (e, index) => {
-        const id = parseInt(e.target.closest('div').id)
-        if(dragMoment.current === id) {
+        const day = parseInt(e.target.closest('div').id)
+        if(dragMoment.current === day) {
+            if(typeof(index) === 'undefined') { return }
             const newTodos = [...todos]
             newTodos.splice(dragIndex.current, 1)
             newTodos.splice(index, 0, {
@@ -166,16 +167,17 @@ function TodoList({ moment, dateObject, dragIndex, dragTodo, dragId, dragMoment,
             })
             setTodos(newTodos)
         } else{
+            if(typeof(index) === 'undefined' && todos.length > 0) { return }
             const newTodos = [...todos]
             newTodos.splice(index ? index : 0, 0, {
                 ...dragTodo.current,
                 id: ++nextId.current,
                 moment: {
                     ...dragTodo.current.moment,
-                    day: id
+                    day: day
                 }
             })
-            e.target.closest('div').class === 'div' ? setTodos([newTodos[0]]) : setTodos(newTodos)
+            e.target.closest('div').class === 'empty' ? setTodos([newTodos[0]]) : setTodos(newTodos)
             dragDelete.current.setTodoList(
                 dragDelete.current.todoList.filter(todo => {
                     return todo.id !== dragId.current
@@ -187,8 +189,7 @@ function TodoList({ moment, dateObject, dragIndex, dragTodo, dragId, dragMoment,
     return (  
         <TodoListDiv 
             id={moment.day}
-            className='div'
-            draggable
+            className='empty'
             onDrop={onDrop}
             onDragOver={(e) => e.preventDefault()}
         >
@@ -217,7 +218,7 @@ function TodoList({ moment, dateObject, dragIndex, dragTodo, dragId, dragMoment,
                     onDrop={(e) => onDrop(e, index)}
                 />
             ))}
-            {/* <Button className="LogButton" onClick={() => { console.log(todos) }}>출력</Button> */}
+            <Button className="LogButton" onClick={() => { console.log(todos) }}>출력</Button>
         </TodoListDiv>
     );
 }

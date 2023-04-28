@@ -1,8 +1,9 @@
 import React, { useState, useRef, useMemo } from "react";
 import { TableHeader, HeaderContainer, DayTop, DayBottom, DayWrapper, OuterBox, Row, Button, MonthNavigator, CurrentDate, ButtonsDiv, OneDay } from "./CalendarTableStyle";
-import { daysInMonth, currentDay, firstDayOfMonth, daysInPrevMonth, year, month, prevMonth, nextMonth } from "../../Util/manageCalendar";
+
+import { daysInMonth, currentDay, firstDayOfMonth, daysInPrevMonth, year, month, prevMonth, nextMonth } from "../../../Util/manageCalendar";
 import moment from "moment";
-import TodoList from "../Todo/TodoListPage";
+import TodoList from "../../Todo/TodoListPage";
 
 function Calendar({ setIsLogin }) {
     const [dateObject, setDateObject] = useState(moment());
