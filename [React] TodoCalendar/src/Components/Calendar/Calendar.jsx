@@ -23,25 +23,6 @@ import {
     WholeCalendar
 } from "./CalendarStyle";
 
-import {
-    year,
-    month,
-    prevMonth,
-    nextMonth
-} from "../../Util/manageCalendar";
-import {
-    HeaderContainer,
-    Button,
-    MonthNavigator,
-    CurrentDate,
-    ButtonsDiv,
-    CalendarWrapper,
-    WeekdayWrapper,
-    DayWrapper,
-    TopDiv,
-    BottomDiv,
-    WholeCalendar
-} from "./CalendarStyle";
 
 function Calendar({ setIsLogin }) {
     const [dateObject, setDateObject] = useState(moment());
