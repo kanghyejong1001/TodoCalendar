@@ -9,7 +9,7 @@ import TodoListView from "../TodoList/TodoListView";
 function TodayTodoList({ }) {
     const [dateObject, setDateObject] = useState(moment());
     if(!JSON.parse(localStorage.getItem('Todo'))) {localStorage.setItem('Todo', JSON.stringify([]))}
-    // const [todos, setTodos] = useState(JSON.parse(localStorage.getItem('Todo')))
+    const [todos, setTodos] = useState(JSON.parse(localStorage.getItem('Todo')))
     // const [todos, setTodos] = useState([
     //     {
     //         id: 1,
@@ -63,21 +63,21 @@ function TodayTodoList({ }) {
     //     },
     // ])
     
-    let res = async () => await request(`/todo-get`)
-    res = res.filter(item => item.todoDate.substring(8, 10) === currentDay(dateObject))
-    res = res.map(item => (
-        {
-            id: parseInt(item.id),
-            text: item.todoName,
-            checked: (item.todoToggle ? true : false),
-            moment: {
-                year: item.todoDate.substring(0, 3),
-                month: item.todoDate.substring(5, 7),
-                day: item.todoDate.substring(7, 9)
-            }
-        }
-    ))
-    const [todos, setTodos] = useState(res)
+    // let res = async () => await request(`/todo-get`)
+    // res = res.filter(item => item.todoDate.substring(8, 10) === currentDay(dateObject))
+    // res = res.map(item => (
+    //     {
+    //         id: parseInt(item.id),
+    //         text: item.todoName,
+    //         checked: (item.todoToggle ? true : false),
+    //         moment: {
+    //             year: item.todoDate.substring(0, 3),
+    //             month: item.todoDate.substring(5, 7),
+    //             day: item.todoDate.substring(7, 9)
+    //         }
+    //     }
+    // ))
+    // const [todos, setTodos] = useState(res)
 
     const nextId = useRef(todos.length)
 
