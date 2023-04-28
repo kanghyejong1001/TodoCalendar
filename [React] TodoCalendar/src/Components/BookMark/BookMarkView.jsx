@@ -1,3 +1,7 @@
+import { 
+    XButton,
+    LinkButton } from "./BookMarkStyle";
+
 function BookMarkView({ BookMark, onDelete, onChange, onDrag, onDrop }) {
     const { id, name, url } = BookMark
 
@@ -9,8 +13,8 @@ function BookMarkView({ BookMark, onDelete, onChange, onDrag, onDrop }) {
             onDrop={onDrop}
             onDragOver={(e) => e.preventDefault()}
         > 
-            <button onClick={() => window.open('https://' + BookMark.url, '_blank', "noopener, noreferrer")}>{BookMark.name}</button>
-            <button onClick={() => onDelete(id)}>X</button>
+            <LinkButton style={{marginBottom: "10px"}} onClick={() => window.open('https://' + BookMark.url, '_blank', "noopener, noreferrer")}>{BookMark.name}</LinkButton>
+            <XButton onClick={() => onDelete(id)}>X</XButton>
         </div>
     )
 }

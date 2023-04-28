@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { request } from "../../api/api";
 import { currentDay } from "../../Util/manageCalendar";
+import { DdayTitle, Ddayday, Input, XButton } from "./DdayStyle";
 
 // locatStorage 사용법
 // 삭제
@@ -143,10 +144,14 @@ function Dday({}) {
     }
     
     return (  
-        <div>
+        <Ddayday>
+            <DdayTitle>D-Day</DdayTitle>
             <div key={nextId.current}>
-                <form onSubmit={onSubmit}>
-                    <input
+                <form onSubmit={onSubmit} 
+                style= {{
+                    display: "flex",
+                    justifyContent: "center"}}>
+                    <Input
                         name="date"
                         type="text" 
                         placeholder="날짜 입력"
@@ -154,7 +159,7 @@ function Dday({}) {
                         onChange={onChange}
                         autoComplete="off"
                     />
-                    <input 
+                    <Input 
                         name="content"
                         type="text" 
                         placeholder="텍스트 입력"
@@ -162,7 +167,7 @@ function Dday({}) {
                         onChange={onChange}
                         autoComplete="off"
                     />
-                    <button type="submit">save</button>
+                    <button type="submit">저장</button>
                 </form>
             </div>        
 
@@ -173,13 +178,17 @@ function Dday({}) {
                 gap = Math.floor((today - checkedDay) / (1000 * 60 * 60 * 24))
 
                 return (
-                    <div key={Dday.id}>
-                        D{(gap > 0 ? "+" + gap : gap) + ' ' + Dday.text}
-                        <button onClick={() => onDelete(Dday.id)}>X</button>    
+                    <div key={Dday.id} 
+                    style={{
+                        display: "flex"
+
+                    }}>
+                        D - {(gap > 0 ? "+" + gap : gap) + ' ' + Dday.text}
+                        <XButton onClick={() => onDelete(Dday.id)}>X</XButton>    
                     </div>
             )})}
-            <button className="LogButton" onClick={() => { console.log(Ddays) }}>출력</button>
-        </div>
+            {/* <button className="LogButton" onClick={() => { console.log(Ddays) }}>출력</button> */}
+        </Ddayday>
     );
 }
 

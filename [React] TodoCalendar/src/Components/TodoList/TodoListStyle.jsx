@@ -25,7 +25,7 @@ export const Button = styled.button`
 
 `
 export const XButton = styled.button`
-    background: white;
+    background: none;
     color: white;
     font-weight: bold;
     padding: 2px;
@@ -33,6 +33,10 @@ export const XButton = styled.button`
         background: none;
         color: black;
         cursor: pointer;
+    }
+    &:active {
+        background: none;
+        color: grey;
     }
 `
 

@@ -1,23 +1,31 @@
 import { useState, useRef } from "react";
 import BookMarkView from "./BookMarkView";
+import {
+    BookMarkTitle,
+    BookMarkChunk,
+    Input,
+    InputForm,
+    BookMarkTop,
+    BookMarkBottom
+} from "./BookMarkStyle";
 
 // locatStorage 사용법
-    // 삭제
-    // localStorage.removeItem('key')
+// 삭제
+// localStorage.removeItem('key')
 
-    // 읽기
-    // JSON.parse(localStorage.getItem('Key'))
+// 읽기
+// JSON.parse(localStorage.getItem('Key'))
 
-    // 저장
-    // localStorage.setItem('Key', JSON.stringify('Value'))
+// 저장
+// localStorage.setItem('Key', JSON.stringify('Value'))
 
 function BookMark() {
-    if(!JSON.parse(localStorage.getItem('BookMark'))) {localStorage.setItem('BookMark', JSON.stringify([]))}
+    if (!JSON.parse(localStorage.getItem('BookMark'))) { localStorage.setItem('BookMark', JSON.stringify([])) }
     const [BookMarks, setBookMarks] = useState(JSON.parse(localStorage.getItem('BookMark')))
     const [name, setName] = useState('')
     const [url, setUrl] = useState('')
     const nextId = useRef(BookMarks.length)
-    
+
     const onDelete = (id) => {
         setBookMarks(
             BookMarks.filter(todo => todo.id !== id)
@@ -30,12 +38,12 @@ function BookMark() {
         currentBookMark = currentBookMark.filter(item => item.id !== id)
         localStorage.setItem('BookMark', JSON.stringify(currentBookMark))
     }
-    
+
     const onChange = (e) => {
-        let {name, value} = e.target
+        let { name, value } = e.target
         name === 'name'
-        ? setName(value)
-        : setUrl(value)
+            ? setName(value)
+            : setUrl(value)
     }
 
     const onSubmit = (e) => {
@@ -57,10 +65,10 @@ function BookMark() {
         )
         let currentBookMark = JSON.parse(localStorage.getItem('BookMark'))
         currentBookMark.push(
-            { 
-                id: nextId.current, 
-                name, 
-                url 
+            {
+                id: nextId.current,
+                name,
+                url
             }
         )
         localStorage.setItem('BookMark', JSON.stringify(currentBookMark))
@@ -76,18 +84,18 @@ function BookMark() {
         console.log(BookMarks[index])
         dragIndex.current = index
         dragBookMark.current = {
-            id: BookMarks[index].id, 
+            id: BookMarks[index].id,
             name: BookMarks[index].name,
             url: BookMarks[index].url
         }
         dragId.current = BookMarks[index].id
         nextId.current = nextId.current === 1 ? 0 : nextId.current
         dragDelete.current = {
-            'BookMark': [...BookMarks], 
+            'BookMark': [...BookMarks],
             'setBookMarks': setBookMarks
         }
     };
-    
+
     const onDrop = (e, index) => {
         const newBookMarks = [...BookMarks]
         newBookMarks.splice(dragIndex.current, 1)
@@ -97,37 +105,44 @@ function BookMark() {
         })
         setBookMarks(newBookMarks)
     }
-    
-    return ( 
-        <div>
-            {BookMarks.map((BookMark, index) => (
-                <BookMarkView 
-                    key={BookMark.id}
-                    BookMark={BookMark} 
-                    onChange={onChange} 
-                    onDelete={onDelete}
-                    onDrag={(e) => onDrag(e, index)}
-                    onDrop={(e) => onDrop(e, index)}
-                />
-            ))}
-            <form onSubmit={onSubmit}>
-                <input 
-                    name="name" 
-                    type="text" 
-                    value={name}
-                    onChange={onChange} 
-                    placeholder="사이트 이름 입력"
-                /><br/>
-                <input 
-                    name="url" 
-                    type="text" 
-                    value={url}
-                    onChange={onChange}
-                    placeholder="URL 입력"
-                /><br/>
-                <button type="submit">save</button>
-            </form>
-        </div>
+
+    return (
+        <BookMarkChunk>
+            <BookMarkTitle>즐겨찾기</BookMarkTitle>
+            <BookMarkTop>
+
+                {BookMarks.map((BookMark, index) => (
+                    <BookMarkView
+                        key={BookMark.id}
+                        BookMark={BookMark}
+                        onChange={onChange}
+                        onDelete={onDelete}
+                        onDrag={(e) => onDrag(e, index)}
+                        onDrop={(e) => onDrop(e, index)}
+                    />
+                ))}
+            </BookMarkTop>
+            <BookMarkBottom>
+                <InputForm onSubmit={onSubmit}>
+                    <Input
+                        name="name"
+                        type="text"
+                        value={name}
+                        onChange={onChange}
+                        placeholder="사이트 이름"
+                    /><br />
+                    <Input
+                        name="url"
+                        type="text"
+                        value={url}
+                        onChange={onChange}
+                        placeholder="URL"
+                    /><br />
+                    <button type="submit">save</button>
+                </InputForm>
+
+            </BookMarkBottom>
+        </BookMarkChunk>
     );
 }
 

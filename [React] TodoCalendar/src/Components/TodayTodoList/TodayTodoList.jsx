@@ -1,9 +1,10 @@
 import moment from "moment";
 import { useState, useRef, useEffect } from "react";
-import { Input, Button, TodoListDiv } from "../TodoList/TodoListStyle"
+import { Button } from "../TodoList/TodoListStyle"
 import { request } from "../../api/api";
 import { currentDay, year, month } from "../../Util/manageCalendar";
 import TodoListView from "../TodoList/TodoListView";
+import { Input, TodoListDiv, TodoListTitle } from "./TodayTodoListStyle";
 
 
 function TodayTodoList({ }) {
@@ -223,12 +224,17 @@ function TodayTodoList({ }) {
     
     return (  
         <TodoListDiv>
+            <TodoListTitle>오늘의 할 일들</TodoListTitle>
             <div>
-                <form onSubmit={onSubmit}>
+                <form onSubmit={onSubmit} 
+                style={{
+                width: "70%", 
+                display: "flex", 
+                justifyContent: "space-around"}}>
                     <Input 
                         id="0"
                         type="text" 
-                        placeholder="할 일 입력"
+                        placeholder="할 일"
                         value={text}
                         onChange={onChange}
                         autoComplete="off"
@@ -248,7 +254,7 @@ function TodayTodoList({ }) {
                     onDrop={(e) => onDrop(e, index)}
                 />
             ))}
-            <Button className="LogButton" onClick={() => { console.log(todos) }}>출력</Button>
+            {/* <Button className="LogButton" onClick={() => { console.log(todos) }}>출력</Button> */}
         </TodoListDiv>
     );
 }

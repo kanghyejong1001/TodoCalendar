@@ -29,6 +29,11 @@ function Calendar({ setIsMainPage, setIsLogin }) {
 
     const daysInWeek = moment.weekdaysShort();
 
+    const dragIndex = useRef()
+    const dragTodo = useRef()
+    const dragId = useRef()
+    const dragMoment = useRef()
+    const dragDelete = useRef()
 
     const dragIndex = useRef()
     const dragTodo = useRef()
