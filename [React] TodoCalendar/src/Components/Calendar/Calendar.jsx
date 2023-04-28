@@ -24,10 +24,16 @@ import {
 } from "./CalendarStyle";
 
 
-function Calendar({ setIsLogin }) {
+function Calendar({ setIsMainPage, setIsLogin }) {
     const [dateObject, setDateObject] = useState(moment());
 
     const daysInWeek = moment.weekdaysShort();
+
+    const dragIndex = useRef()
+    const dragTodo = useRef()
+    const dragId = useRef()
+    const dragMoment = useRef()
+    const dragDelete = useRef()
 
     const dragIndex = useRef()
     const dragTodo = useRef()
@@ -75,6 +81,7 @@ function Calendar({ setIsLogin }) {
     return (
         <WholeCalendar>
             <HeaderContainer>
+                <button onClick={() => setIsMainPage(true)}>Main Page</button>
                 <CurrentDate>{dateObject.format("Y년 M월")}</CurrentDate>
                 <ButtonsDiv>
                     <MonthNavigator>

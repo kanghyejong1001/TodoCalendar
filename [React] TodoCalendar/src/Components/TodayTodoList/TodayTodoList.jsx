@@ -64,8 +64,20 @@ function TodayTodoList({ }) {
     //     },
     // ])
     
-    // console.log(`/todos/${year(dateObject)}${month(dateObject)}${currentDay(dateObject)}`)
-    // const res = async () => await request(`/todos/${year(moment)}${month(moment)}${currentDay(moment)}`)
+    // let res = async () => await request(`/todo-get`)
+    // res = res.filter(item => item.todoDate.substring(8, 10) === currentDay(dateObject))
+    // res = res.map(item => (
+    //     {
+    //         id: parseInt(item.id),
+    //         text: item.todoName,
+    //         checked: (item.todoToggle ? true : false),
+    //         moment: {
+    //             year: item.todoDate.substring(0, 3),
+    //             month: item.todoDate.substring(5, 7),
+    //             day: item.todoDate.substring(7, 9)
+    //         }
+    //     }
+    // ))
     // const [todos, setTodos] = useState(res)
 
     const nextId = useRef(todos.length)

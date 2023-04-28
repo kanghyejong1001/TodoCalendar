@@ -22,6 +22,7 @@ import TodayTodoList from "./Components/TodayTodoList/TodayTodoList";
 function App() {
   const [checkId, setCheckId] = useState(true)
   const [isLogin, setIsLogin] = useState(true)
+  const [isMainPage, setIsMainPage] = useState(false)
   // <button onClick=get()>GET</button>
   // <button onClick=post()>POST</button>
   // <button onClick=put()>PUT</button>
@@ -54,26 +55,35 @@ function App() {
     <Body isLogin={isLogin}>
       {isLogin
         ?
-        <>
-          <TimeDiv>
-            <Time />
-          </TimeDiv>
-          <LogoutDiv>
-            <LogoutButton onClick={() => setIsLogin(false)}>로그아웃</LogoutButton>
-          </LogoutDiv>
-          <CalendarDiv>
-            <MiniCalendar/>
-          </CalendarDiv>
-          <TodoDiv><TodayTodoList/></TodoDiv>
-          <DdayDiv>
-            <Dday/>
-          </DdayDiv>
-          <BookmarkDiv>
-            <BookMark />
-          </BookmarkDiv>
-{/* 
-            <Calendar setIsLogin={setIsLogin} /> */}
-        </>
+        (isMainPage 
+          ? 
+          (
+            <>
+              <TimeDiv>
+                <Time />
+              </TimeDiv>
+              <LogoutDiv>
+                <LogoutButton onClick={() => setIsLogin(false)}>로그아웃</LogoutButton>
+              </LogoutDiv>
+              <CalendarDiv>
+                <MiniCalendar/>
+                <button onClick={() => {
+                  setIsMainPage(false)
+                  console.log(isMainPage)
+                }}>+</button>
+              </CalendarDiv>
+              <TodoDiv><TodayTodoList/></TodoDiv>
+              <DdayDiv><Dday/></DdayDiv>
+              <BookmarkDiv><BookMark /></BookmarkDiv>
+            </>
+          ) 
+          :
+          (
+            <>
+              <Calendar setIsMainPage={setIsMainPage} setIsLogin={setIsLogin} />
+            </>
+          )
+        )
         : (checkId
           ?
           <>
@@ -88,12 +98,12 @@ function App() {
       }
       {/* <TodoList todos={ todos } onToggle={ onToggle } onD~elete={ onDelete } onInsert={onInsert} /> */}
       {/* <button 
-           onClick={() => {
-             console.log(todos)
-             console.log(nextId.current)
-           }}
-         >
-           현재
+            onClick={() => {
+              console.log(todos)
+              console.log(nextId.current)
+            }}
+          >
+        현재
          </button> */}
 
       {/* <BrowserRouter>
