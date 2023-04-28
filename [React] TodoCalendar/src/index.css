@@ -3,7 +3,6 @@
   line-height: 1.5;
   font-weight: 400;
 
-
   /*#242424;*/
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -30,7 +29,6 @@ html {
   font-weight: bold;
   color: black;
   background-color: white;
-  overflow-x: hidden;
   font-size: 20px;
 }
 

@@ -23,16 +23,31 @@ import {
     WholeCalendar
 } from "./CalendarStyle";
 
+import {
+    year,
+    month,
+    prevMonth,
+    nextMonth
+} from "../../Util/manageCalendar";
+import {
+    HeaderContainer,
+    Button,
+    MonthNavigator,
+    CurrentDate,
+    ButtonsDiv,
+    CalendarWrapper,
+    WeekdayWrapper,
+    DayWrapper,
+    TopDiv,
+    BottomDiv,
+    WholeCalendar
+} from "./CalendarStyle";
+
 function Calendar({ setIsLogin }) {
     const [dateObject, setDateObject] = useState(moment());
 
     const daysInWeek = moment.weekdaysShort();
 
-    const dragIndex = useRef()
-    const dragTodo = useRef()
-    const dragId = useRef()
-    const dragMoment = useRef()
-    const dragDelete = useRef()
 
     const daysInMonthArr = () => {
         const startOfMonth = moment(dateObject).startOf("month").format("d");
@@ -76,7 +91,6 @@ function Calendar({ setIsLogin }) {
             <HeaderContainer>
                 <CurrentDate>{dateObject.format("Y년 M월")}</CurrentDate>
                 <ButtonsDiv>
-                    <Button onClick={() => setIsLogin(false)}>logout</Button>
                     <MonthNavigator>
                         <Button onClick={() => setDateObject(prevMonth(dateObject))}>
                             {`${prevMonth(dateObject).format("M")}월`}
