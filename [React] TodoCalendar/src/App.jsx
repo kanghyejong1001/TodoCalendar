@@ -52,30 +52,27 @@ function App() {
   return (
 
     <Body isLogin={isLogin}>
-      {/* <TodayTodoList/> */}
-      {/* <Dday/> */}
-      {/* <BookMark/> */}
       {isLogin
         ?
         <>
-          <TimeDiv>
+          {/* <TimeDiv>
             <Time />
           </TimeDiv>
           <LogoutDiv>
             <LogoutButton onClick={() => setIsLogin(false)}>로그아웃</LogoutButton>
           </LogoutDiv>
           <CalendarDiv>
-            {/* <Calendar setIsLogin={setIsLogin} /> */}
             <MiniCalendar/>
           </CalendarDiv>
-          <TodoDiv></TodoDiv>
+          <TodoDiv><TodayTodoList/></TodoDiv>
           <DdayDiv>
-            <Dday />
+            <Dday/>
           </DdayDiv>
           <BookmarkDiv>
             <BookMark />
-          </BookmarkDiv>
+          </BookmarkDiv> */}
 
+            <Calendar setIsLogin={setIsLogin} />
         </>
         : (checkId
           ?
