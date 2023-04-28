@@ -48,11 +48,10 @@ function App() {
   // }
 
   return (
-    <Body>
+    <Body isLogin={isLogin}>
       {isLogin
         ?
         <>
-
           <TimeDiv>
             <Time />
           </TimeDiv>
@@ -75,7 +74,7 @@ function App() {
         : (checkId
           ?
           <>
-            <LoginForm setIsLogin={setIsLogin} setCheckId={setCheckId} />
+            <LoginForm style={{postion: 'absolute', top: '50%', left: '50%'}} setIsLogin={setIsLogin} setCheckId={setCheckId} />
           </>
           :
           <>

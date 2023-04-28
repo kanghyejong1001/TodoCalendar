@@ -1,14 +1,23 @@
 import styled from "@emotion/styled";
-
+import { css } from 'styled-components';
 
 const Body = styled.div`
     position: relative; 
     width: 100vw;
     height: 100vh;
     border: black solid 1px;
-    display: grid;
+    display: ${props => (props.isLogin ? "grid" : "flex")};
+    
+    ${props => props.isLogin ? 
+    css`
     grid-template-columns: 2fr 3fr 2fr;
     grid-template-rows: 1fr 3fr 1fr;
+    ` :
+    css`
+    justify-content: center;
+    align-items: center;
+    `}
+    
 `;
 
 const TimeDiv = styled.div`
