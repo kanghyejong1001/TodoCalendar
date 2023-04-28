@@ -55,7 +55,7 @@ function App() {
       {isLogin
         ?
         <>
-          {/* <TimeDiv>
+          <TimeDiv>
             <Time />
           </TimeDiv>
           <LogoutDiv>
@@ -70,9 +70,9 @@ function App() {
           </DdayDiv>
           <BookmarkDiv>
             <BookMark />
-          </BookmarkDiv> */}
-
-            <Calendar setIsLogin={setIsLogin} />
+          </BookmarkDiv>
+{/* 
+            <Calendar setIsLogin={setIsLogin} /> */}
         </>
         : (checkId
           ?
