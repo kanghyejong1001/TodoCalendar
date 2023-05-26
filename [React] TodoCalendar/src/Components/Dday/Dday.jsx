@@ -183,7 +183,7 @@ function Dday({}) {
                         display: "flex"
 
                     }}>
-                        D - {(gap > 0 ? "+" + gap : gap) + ' ' + Dday.text}
+                        D {(gap > 0 ? "+ " + gap : ('- ' + -gap)) + ' ' + Dday.text}
                         <XButton onClick={() => onDelete(Dday.id)}>X</XButton>    
                     </div>
             )})}

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import moment from "moment";
+import { Link } from "react-router-dom";
 
 import {
     year,
@@ -27,7 +28,7 @@ import {
 
 } from "./MiniCalendarStyle";
 
-function MiniCalendar() {
+function MiniCalendar({ }) {
     const [dateObject, setDateObject] = useState(moment());
 
     const daysInWeek = moment.weekdaysShort();
@@ -73,9 +74,7 @@ function MiniCalendar() {
                             Month
                         </Button>
                     </ViewChangeDiv>
-                    <Button className="Plus">
-                        +
-                    </Button>
+                    <Link className="Calendar" to="/calendar">+</Link>
                 </HeaderTop>
                 <HeaderBottom>
                     <Button className="LeftButton" onClick={() => setDateObject(prevMonth(dateObject))}>

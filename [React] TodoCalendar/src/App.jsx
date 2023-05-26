@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import { useRef, useState } from "react"
+import { Link } from "react-router-dom";
+import { useState } from "react"
 import LoginForm from "./Components/Login/LoginForm";
 import SignUpForm from "./Components/Login/SignUpForm";
 import {
@@ -20,9 +21,19 @@ import Calendar from "./Components/Calendar/Calendar";
 import TodayTodoList from "./Components/TodayTodoList/TodayTodoList";
 
 function App() {
-  const [checkId, setCheckId] = useState(true)
+  const [loginInfo, setLoginInfo] = useState()
+  const [signUpInfo, setSignUpInfo] = useState()
   const [isLogin, setIsLogin] = useState(true)
-  const [isMainPage, setIsMainPage] = useState(false)
+
+  const checkLogin = (data) => {
+    setLoginInfo(data)
+    console.log(loginInfo)
+    
+  }
+
+  
+  // const [checkId, setCheckId] = useState(true)
+  // const [isMainPage, setIsMainPage] = useState(true)
   // <button onClick=get()>GET</button>
   // <button onClick=post()>POST</button>
   // <button onClick=put()>PUT</button>
@@ -53,66 +64,31 @@ function App() {
   return (
 
     <Body isLogin={isLogin}>
-      {isLogin
-        ?
-        (isMainPage 
-          ? 
-          (
-            <>
-              <TimeDiv>
-                <Time />
-              </TimeDiv>
-              <LogoutDiv>
-                <LogoutButton onClick={() => setIsLogin(false)}>로그아웃</LogoutButton>
-              </LogoutDiv>
-              <CalendarDiv>
-                <MiniCalendar/>
-                <button onClick={() => {
-                  setIsMainPage(false)
-                  console.log(isMainPage)
-                }}>+</button>
-              </CalendarDiv>
-              <TodoDiv><TodayTodoList/></TodoDiv>
-              <DdayDiv><Dday/></DdayDiv>
-              <BookmarkDiv><BookMark /></BookmarkDiv>
-            </>
-          ) 
-          :
-          (
-            <>
-              <Calendar setIsMainPage={setIsMainPage} setIsLogin={setIsLogin} />
-            </>
-          )
-        )
-        : (checkId
-          ?
-          <>
-            <LoginForm style={{postion: 'absolute', top: '50%', left: '50%'}} setIsLogin={setIsLogin} setCheckId={setCheckId} />
-          </>
-          :
-          <>
-            <SignUpForm setCheckId={setCheckId} />
-          </>
-        )
-
-      }
-      {/* <TodoList todos={ todos } onToggle={ onToggle } onD~elete={ onDelete } onInsert={onInsert} /> */}
-      {/* <button 
-            onClick={() => {
-              console.log(todos)
-              console.log(nextId.current)
-            }}
-          >
-        현재
-         </button> */}
-
-      {/* <BrowserRouter>
+      <BrowserRouter>
           <Routes>
-            <Route index element={<Home />}/>
-            <Route path="movie/:id" element={<MovieDetail />}/>
-            <Route path="movies/:type" element={<MovieList />}/>
+            <Route index element={
+              <>
+                <TimeDiv>
+                  <Time />
+                </TimeDiv>
+                <LogoutDiv>
+                  <LogoutButton onClick={() => setIsLogin(false)}><Link to="/login">로그아웃</Link></LogoutButton>
+                </LogoutDiv>
+                <CalendarDiv>
+                  <MiniCalendar/>
+                </CalendarDiv>
+                <TodoDiv><TodayTodoList/></TodoDiv>
+                <DdayDiv><Dday/></DdayDiv>
+                <BookmarkDiv><BookMark /></BookmarkDiv>
+              </>  
+            }/>
+            
+            <Route path="/login" element={<LoginForm onSubmit={checkLogin} style={{postion: 'absolute', top: '50%', left: '50%'}}/>}/>
+            <Route path="/sign" element={<SignUpForm onSubmit={setSignUpInfo}/>} />
+            <Route path="/calendar" element={<Calendar/>}/>
+            <Route path="*" element={<>404 page</>}/>
           </Routes>
-        </BrowserRouter> */}
+        </BrowserRouter>
     </Body>
   )
 }

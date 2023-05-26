@@ -1,15 +1,15 @@
 import { useForm } from "react-hook-form";
 import { Title, ErrorText, CardForm, ButtonContainer, Input } from "./LoginStyle";
+import { Link } from "react-router-dom";
 
-
-const LoginForm = ({ onSubmit, setIsLogin, setCheckId }) => {
+const LoginForm = ({ onSubmit }) => {
     const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm();
 
     return (
         // <CardForm onSubmit={handleSubmit(onSubmit)}>
         <CardForm onSubmit={handleSubmit((data) => {
             console.log(data)
-            setIsLogin(true)
+            onSubmit(data)
         })}>
             <Title>로그인</Title>
             <Input
@@ -30,11 +30,11 @@ const LoginForm = ({ onSubmit, setIsLogin, setCheckId }) => {
             />
             {errors.password && <ErrorText>{errors.password.message}</ErrorText>}
             <ButtonContainer>
-                <button type="submit" disabled={isSubmitting} style={{ marginTop: 16 }}>
+                <button type="submit" disabled={isSubmitting} onClick={() => <Link to="/" />} cstyle={{ marginTop: 16 }}>
                     로그인
                 </button>
-                <button className="bottomButton" type="button" onClick={() => setCheckId(false)} disabled={isSubmitting} style={{ marginTop: 16 }}>
-                    회원 가입
+                <button className="bottomButton" type="button" disabled={isSubmitting}  style={{ marginTop: 16 }}>
+                    <Link className="signUp" to="/sign">회원 가입</Link>
                 </button>
             </ButtonContainer>
 

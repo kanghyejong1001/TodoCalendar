@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import moment from "moment";
 import TodoList from "../TodoList/TodoListPage";
+import { Link } from "react-router-dom";
 
 import {
     year,
@@ -24,16 +25,10 @@ import {
 } from "./CalendarStyle";
 
 
-function Calendar({ setIsMainPage, setIsLogin }) {
+function Calendar({ }) {
     const [dateObject, setDateObject] = useState(moment());
 
     const daysInWeek = moment.weekdaysShort();
-
-    const dragIndex = useRef()
-    const dragTodo = useRef()
-    const dragId = useRef()
-    const dragMoment = useRef()
-    const dragDelete = useRef()
 
     const dragIndex = useRef()
     const dragTodo = useRef()
@@ -81,7 +76,7 @@ function Calendar({ setIsMainPage, setIsLogin }) {
     return (
         <WholeCalendar>
             <HeaderContainer>
-                <button onClick={() => setIsMainPage(true)}>Main Page</button>
+                <Link className="MainPage" to="/">Main Page</Link>
                 <CurrentDate>{dateObject.format("Y년 M월")}</CurrentDate>
                 <ButtonsDiv>
                     <MonthNavigator>
